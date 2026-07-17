@@ -384,6 +384,10 @@ textarea{
     <p class="mini-cal-note">タップした日は「きょうのミッション」がお休みになります。</p>
     <div class="cal-wrap" id="restCal" style="margin-top:8px"></div>
 
+    <h3>マイルストーン（えにっき・かんそう文などの日付決め）</h3>
+    <p class="hint">項目ごとに「やる日」を決められます。日付を入れた項目は<strong>その日</strong>の「きょうのミッション」に出ます（やらないと翌日以降も出続けます）。空欄の項目はしめきり日あつかいです。1つでも日付を入れた宿題は、自動わりふり・やる日プランより<strong>こちらが優先</strong>されます。</p>
+    <div id="msFields"></div>
+
     <h3>やる日プラン（やる日をこちらで決める）</h3>
     <p class="hint">宿題を選んでから、カレンダーの日をタップしてください。プランを入れた宿題は<strong>選んだ日だけ</strong>ミッションに出ます（量は残りを予定日で等分）。何も選ばない宿題は、これまで通り毎日自動でわりふられます。</p>
     <div class="chips" id="planHwChips"></div>
@@ -437,6 +441,7 @@ function fill(s){
   s.done=s.done||{};                // key "hwid:idx" -> "YYYY-MM-DD" or "bulk"
   s.deadlines=s.deadlines||{};
   s.plan=s.plan||{};                // hwid -> ["YYYY-MM-DD", ...] やる日プラン
+  s.milestones=s.milestones||{};    // "hwid:idx" -> "YYYY-MM-DD" 項目ごとのマイルストーン日
   s.rest=s.rest||[];
   s.opt=s.opt||{kansobun:true,shiraberu:true};
   s.avatar=s.avatar||'🐯';
@@ -573,6 +578,11 @@ function doneTodayCount(h){
   return n;
 }
 function deadline(h){return state.deadlines[h.id]||DEFAULT_DEADLINE;}
+function msMode(h){
+  for(let i=0;i<units(h);i++)if(state.milestones[h.id+':'+i])return true;
+  return false;
+}
+function fmtShort(iso){const[y,m,d]=iso.split('-').map(Number);return m+'月'+d+'日';}
 /* quota: expected cumulative by today (even spread over active days) minus already done before today */
 function quotaToday(h){
   const t=todayStr();
@@ -582,6 +592,17 @@ function quotaToday(h){
   const remainStart=total-(done-doneToday); // remaining as of this morning
   if(remainStart<=0)return doneToday;
   const dl=deadline(h);
+  // マイルストーン日が1つでもある宿題は、期日が来た項目だけを出す
+  // （日付なしの項目はしめきり日あつかい。自動わりふり・やる日プランより優先）
+  if(h.labels&&msMode(h)){
+    let q=0;
+    for(let i=0;i<units(h);i++){
+      const k=h.id+':'+i,d=state.done[k];
+      const due=state.milestones[k]||dl;
+      if(due<=t&&(!d||d===t))q++;
+    }
+    return q;
+  }
   // やる日プランがある宿題は、指定日だけミッションに出す（残りを予定日で等分）
   const plan=(state.plan[h.id]||[]).filter(d=>!state.rest.includes(d));
   if(plan.length){
@@ -736,7 +757,8 @@ function renderList(){
       const k=h.id+':'+i;
       const c=document.createElement('button');
       c.className='chip'+(state.done[k]?' on':'')+(h.labels?' wide':'');
-      c.textContent=(state.done[k]&&h.labels?'✅ ':'')+unitLabel(h,i)+(h.labels?'':'');
+      const ms=h.labels&&state.milestones[k];
+      c.textContent=(state.done[k]&&h.labels?'✅ ':'')+unitLabel(h,i)+(ms?'（'+fmtShort(ms)+'）':'');
       c.addEventListener('click',()=>{
         if(state.done[k])delete state.done[k];
         else state.done[k]=todayStr();
@@ -800,7 +822,15 @@ function monthGrid(year,month,opts){ // month:1-12
   return cal;
 }
 function planDots(iso){
-  return homeworks().filter(h=>(state.plan[h.id]||[]).includes(iso)).map(h=>h.color);
+  return homeworks().filter(h=>{
+    if((state.plan[h.id]||[]).includes(iso))return true;
+    if(!h.labels)return false;
+    for(let i=0;i<units(h);i++){
+      const k=h.id+':'+i;
+      if(state.milestones[k]===iso&&!state.done[k])return true;
+    }
+    return false;
+  }).map(h=>h.color);
 }
 function renderCal(){
   const body=document.getElementById('calBody');
@@ -924,6 +954,30 @@ function openParent(){
   };
   rc.appendChild(monthGrid(2026,7,{onTap:tap}));
   rc.appendChild(monthGrid(2026,8,{onTap:tap}));
+  // milestones（ラベル型の宿題のみ）
+  const mf=document.getElementById('msFields');
+  mf.innerHTML='';
+  homeworks().filter(h=>h.labels).forEach(h=>{
+    const head=document.createElement('div');
+    head.style.cssText='font-weight:800;font-size:14px;margin:10px 0 4px';
+    head.textContent=h.icon+' '+h.name;
+    mf.appendChild(head);
+    h.labels.forEach((lb,i)=>{
+      const k=h.id+':'+i;
+      const f=document.createElement('div');f.className='field';
+      f.innerHTML='<label style="padding-left:12px">'+lb+'</label>';
+      const inp=document.createElement('input');
+      inp.type='date';inp.min=SUMMER_START;inp.max='2026-09-01';
+      inp.value=state.milestones[k]||'';
+      inp.addEventListener('change',()=>{
+        if(inp.value)state.milestones[k]=inp.value;
+        else delete state.milestones[k];
+        save();renderAll();
+      });
+      f.appendChild(inp);
+      mf.appendChild(f);
+    });
+  });
   // plan UI
   renderPlanUI();
   // backup
