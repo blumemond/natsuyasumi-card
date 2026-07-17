@@ -229,6 +229,23 @@ section[hidden]{display:none}
   padding:10px 12px;font-size:13px;margin-top:10px;line-height:1.6;
 }
 .b-hint b{color:var(--sun-deep)}
+.b-rev-toggle{
+  display:flex;align-items:center;gap:6px;width:100%;
+  min-height:48px;border-radius:12px;padding:8px 12px;margin-top:10px;
+  background:#EFF7FC;border:2px solid #CFE7F4;
+  font-size:14px;font-weight:800;color:var(--sky-deep);
+}
+.b-rev-toggle .arw{margin-left:auto;font-size:12px;transition:transform .2s}
+.b-rev-toggle[aria-expanded="true"] .arw{transform:rotate(90deg)}
+.b-rev{margin-top:8px}
+.rev-note{font-size:11.5px;color:var(--ink-soft);font-weight:700;margin:2px 0 8px}
+.rev-note a{color:var(--sky-deep)}
+.rev-item{
+  background:#F8FBFE;border:1.5px solid #DCEBF5;border-radius:0 14px 14px 14px;
+  padding:8px 12px;font-size:13.5px;line-height:1.65;margin-bottom:7px;
+  position:relative;
+}
+.rev-item::before{content:"💬 ";font-size:12px}
 .b-want{display:flex;align-items:center;gap:8px;margin-top:12px;flex-wrap:wrap}
 .b-want .lbl{font-size:13px;font-weight:800;color:var(--ink-soft)}
 .face{
@@ -931,23 +948,76 @@ const BOOKS=[
    author:'むらかみしいこ さく／たんじあきこ え',pub:'佼成出版社・1,540円',
    isbn:'4333029449',color:'#E85C8A',
    desc:'しゅくだいが きらいな まこちゃんの ところに、なんでも こたえてくれる「コトバロボ」が やってきた！ ぜんぶ ロボットに まかせて いいのかな…？ 「じぶんで まなぶって どういうこと？」を かんがえる おはなし。',
-   hint:'<b>こんな子にピッタリ：</b>ロボットや AI が すきな子、べんきょうを がんばりたい子<br><b>かきやすさ：</b>「じぶんだったら ロボットに たのむ？」と、じぶんの べんきょうと くらべて かきやすいよ'},
+   hint:'<b>こんな子にピッタリ：</b>ロボットや AI が すきな子、べんきょうを がんばりたい子<br><b>かきやすさ：</b>「じぶんだったら ロボットに たのむ？」と、じぶんの べんきょうと くらべて かきやすいよ',
+   bm:'22781258',
+   revs:[
+     '「ドリルは やりたくないなあ」という まこちゃんの 気もち、すごく わかる！ じぶんと おなじだと おもいながら よめたよ',
+     'らくを して こたえだけ もらっても、じぶんの 力に ならないんだ、と きづかされた',
+     'ロボットや AI と どう つきあえば いいか、かんがえる きっかけに なる 本だよ',
+     'ロボの先生「よみかきただし先生」が、ちょっと こわいけど おもしろい！ いい あじを 出しているよ',
+     'ズルを した ときに、まこちゃんの むねが ズキッと いたむ ところが、とても よく わかったよ',
+     '「おばあちゃんを かなしませたくない」という まこちゃんの 気もちに、ぐっと きたよ',
+     'さいごは ほろっと きて、くすっと わらえたよ。まこちゃんの せいちょうが 見られて ハッピー！',
+     'コトバロボが かわいい！ わたしも ともだちに なりたいなあ',
+     'えが かわいくて、おはなしも おもしろいから、たのしく よめたよ',
+     'ながすぎない おはなしだから、おうちの人に よんでもらっても いいね',
+   ]},
   {id:'iikoto',title:'なにかいいことあった？',kind:'えほん（ほんやく）',
    author:'ミーシャ・アーチャー さく／いしづちひろ やく',pub:'BL出版・1,870円',
    isbn:'4776411474',color:'#35A7DE',
    desc:'おじいちゃんに「なにか いいこと さがしてごらん」と いわれた ダニエル。とりや 木や かぜと であいながら、まいにちの 中に ある ちいさな「いいこと」を みつけていく えほん。',
-   hint:'<b>こんな子にピッタリ：</b>やさしい えが すきな子、おさんぽや しぜんが すきな子<br><b>かきやすさ：</b>「じぶんの きょうの いいこと」を さがして かけるよ。えにっきとも つながる テーマ'},
+   hint:'<b>こんな子にピッタリ：</b>やさしい えが すきな子、おさんぽや しぜんが すきな子<br><b>かきやすさ：</b>「じぶんの きょうの いいこと」を さがして かけるよ。えにっきとも つながる テーマ',
+   bm:'22372910',
+   revs:[
+     'えが とにかく きれい！ いろんな かみを はりあわせた ような えが すてきだよ',
+     'とくべつな ことが なくても、「いいこと」は みぢかに たくさん あるんだと きづけたよ',
+     'よみおわった あと、じぶんも「きょう なにか いいこと あったかな？」と かんがえたく なったよ',
+     'おじいちゃんと ダニエルの やりとりに、こころが ほっこり したよ',
+     'いわや とりや おたまじゃくしにまで「いいこと あった？」と きいてまわる ダニエルが かわいい！',
+     '口ぶえが ふけるように なった、あたらしい はが はえてきた。じぶんの せいちょうに 気づく ところが いいね',
+     'かぞくで おたがいの「きょうの いいこと」を はなしたく なる 本だよ',
+     'さいごに ダニエルが おじいちゃんに 「いいこと あった？」と ききかえす ところが すてき！',
+     'はるの こうえんの 生きものが たくさん 出てきて、たのしいよ',
+     'まいにちが つまらないなあ、と おもっている子にこそ よんでほしいな',
+   ]},
   {id:'lala',title:'ララのまほうのことば',kind:'えほん（ほんやく）',
    author:'グレーシー・ジャン さく／やのあやこ やく',pub:'工学図書・1,980円',
    isbn:'4769205147',color:'#37A169',
    desc:'げんきいっぱい、どろんこの ララ。こころを こめて やさしく よびかけると、まわりの せかいが いきいきと かわっていく。「やさしい ことば」の まほうの おはなし。',
-   hint:'<b>こんな子にピッタリ：</b>おともだちや かぞくとの ことばを たいせつに したい子<br><b>かきやすさ：</b>「ありがとう」など、いわれて うれしかった ことばの おもいでと つなげやすいよ'},
+   hint:'<b>こんな子にピッタリ：</b>おともだちや かぞくとの ことばを たいせつに したい子<br><b>かきやすさ：</b>「ありがとう」など、いわれて うれしかった ことばの おもいでと つなげやすいよ',
+   bm:'22709653',
+   revs:[
+     'しろくろの えの中で、ララの きいろい ワンピースと みどりの 草が キラキラ かがやいて 見えるよ',
+     'やさしい ことばを かけると 草木が げんきに なる。よんでいて こころが あたたかく なったよ',
+     'ことばは 人にも しょくぶつにも とどくんだなあ、と おもえたよ',
+     'あさがおや ミニトマトなど、しょくぶつを そだてている子に ぴったりの 本だよ',
+     'おかあさんが さいごに ララの いいところに 気づいてくれて、よかった！',
+     'どろんこに なっても 元気いっぱいの ララが だいすき！',
+     'ララの 気もちが しょくぶつに つうじる ラストが、ふしぎで すてきだったよ',
+     '「だい、だい、だいすき」みたいな ララの まほうの ことばを、まねしたく なるよ',
+     '大きく そだった 木かげが まちを すずしくする ところは、ちきゅうの ことも かんがえられるね',
+     'よんだら、おうちの 草や 木にも はなしかけたく なったよ',
+   ]},
   {id:'tane',title:'たねはいのちのおわりとはじまり',kind:'しゃしんえほん（かがく）',
    author:'すずきじゅん ちょ',pub:'ブロンズ新社・1,540円',
    isbn:'4893097474',color:'#FFB03A',
    desc:'たねから めが 出て、花が さいて、かれて、また たねに なる。たくさんの しゃしんで「いのちの めぐり」を たしかめられる かがくの えほん。',
-   hint:'<b>こんな子にピッタリ：</b>草花や 虫など、しぜんの かんさつが すきな子<br><b>かきやすさ：</b>なつやすみに ほんものの たねを さがして、みつけた ことも かくと せかいに 1つだけの かんそう文に なるよ'},
+   hint:'<b>こんな子にピッタリ：</b>草花や 虫など、しぜんの かんさつが すきな子<br><b>かきやすさ：</b>なつやすみに ほんものの たねを さがして、みつけた ことも かくと せかいに 1つだけの かんそう文に なるよ',
+   bm:'22827293',
+   revs:[
+     'しゃしんが とても きれい！ いろんな たねと めの しゃしんが いっぱいだよ',
+     'たんぽぽの わたげから ねっこが 出る ところ、はじめて 見た！ びっくり！',
+     'めが 出るとき、さいしょに 出てくるのは はっぱじゃなくて ねっこ なんだって',
+     '「にょき」「しゃきーん」みたいな たのしい ことばが ついていて、かわいいよ',
+     'なんの たねか あてる クイズも あって、さいごまで あきずに よめたよ',
+     '大きな 木も、はじまりは 小さな 1つぶの たね。すごい パワーだね',
+     '花は かれても、また たねに なる。「さよなら」は「おかえり」でも あるんだね',
+     'よんだら、そとで たねを さがしたり、まいて みたく なったよ',
+     'ハートの かたちの たねとか、おもしろい かたちの たねが たくさん 出てくるよ',
+     'いっしょに かんさつ している きぶんに なれる。かんさつが すきな子に ぴったり！',
+   ]},
 ];
+const revOpen=new Set();
 function renderBook(){
   const body=document.getElementById('bookBody');
   body.innerHTML='';
@@ -977,6 +1047,11 @@ function renderBook(){
       '</div>'+
       '<p class="b-desc">'+b.desc+'</p>'+
       '<div class="b-hint">'+b.hint+'</div>'+
+      '<button class="b-rev-toggle" aria-expanded="'+revOpen.has(b.id)+'">💬 よんだ<ruby>人<rt>ひと</rt></ruby>の かんそう（'+b.revs.length+'）<span class="arw">▶</span></button>'+
+      '<div class="b-rev" '+(revOpen.has(b.id)?'':'hidden')+'>'+
+        '<div class="rev-note">※ <a href="https://bookmeter.com/books/'+b.bm+'" target="_blank" rel="noopener">どくしょメーター</a>の みんなの かんそうを、よみやすい ことばに かきなおしたよ</div>'+
+        b.revs.map(r=>'<div class="rev-item">'+r+'</div>').join('')+
+      '</div>'+
       '<div class="b-want"><span class="lbl">よみたい？</span>'+
         [['2','😍','よみたい'],['1','🙂','ふつう'],['0','😐','うーん']].map(f=>
           '<button class="face'+(String(want)===f[0]?' on':'')+'" data-w="'+f[0]+'"><span class="em">'+f[1]+'</span>'+f[2]+'</button>').join('')+
@@ -994,6 +1069,10 @@ function renderBook(){
     im.addEventListener('error',fail);
     im.addEventListener('load',()=>{if(im.naturalWidth<=1)fail();});
     if(im.complete&&im.naturalWidth<=1)fail();
+    card.querySelector('.b-rev-toggle').addEventListener('click',()=>{
+      if(revOpen.has(b.id))revOpen.delete(b.id);else revOpen.add(b.id);
+      renderBook();
+    });
     card.querySelectorAll('.face').forEach(f=>{
       f.addEventListener('click',()=>{
         const w=Number(f.dataset.w);
