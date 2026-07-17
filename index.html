@@ -74,10 +74,11 @@ nav{
 .tab{
   flex:1;min-height:52px;border-radius:16px;
   background:var(--card);box-shadow:var(--shadow);
-  font-size:16px;font-weight:800;color:var(--ink-soft);
-  border:2px solid transparent;
+  font-size:15px;font-weight:800;color:var(--ink-soft);
+  border:2px solid transparent;padding:0 2px;
 }
 .tab[aria-selected="true"]{color:#fff;background:var(--sky);border-color:var(--sky-deep)}
+@media (max-width:430px){nav{gap:5px}.tab{font-size:13px;border-radius:13px}}
 
 main{max-width:760px;margin:0 auto;padding:10px 12px 90px}
 section[hidden]{display:none}
@@ -195,6 +196,76 @@ section[hidden]{display:none}
 .pdots i{width:6px;height:6px;border-radius:50%;display:block}
 .cal-note{text-align:center;font-size:13px;color:var(--ink-soft);margin-top:10px}
 
+/* ---------- book (かんそう文の本えらび) ---------- */
+.book-card{
+  background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);
+  margin-bottom:14px;padding:14px;
+  border-left:10px solid var(--mcolor,var(--sky));
+}
+.book-card.picked{outline:3px solid var(--sun);outline-offset:-1px;background:#FFFDF4}
+.b-top{display:flex;gap:12px}
+.b-cover{
+  flex:none;width:96px;height:128px;border-radius:10px;overflow:hidden;
+  background:var(--mcolor,var(--sky));position:relative;
+  box-shadow:0 2px 0 rgba(35,68,93,.15);
+}
+.b-cover img{width:100%;height:100%;object-fit:cover;display:block}
+.b-cover .ph{
+  position:absolute;inset:0;display:none;flex-direction:column;
+  align-items:center;justify-content:center;color:#fff;text-align:center;
+  font-size:11px;font-weight:800;padding:6px;line-height:1.4;
+}
+.b-cover .ph .bic{font-size:30px;margin-bottom:4px}
+.b-cover.noimg img{display:none}
+.b-cover.noimg .ph{display:flex}
+.b-info{flex:1;min-width:0}
+.b-title{font-size:16px;font-weight:800;margin:0 0 2px;text-wrap:balance}
+.b-badge{display:inline-block;font-size:11px;background:var(--sun);color:var(--ink);
+  border-radius:8px;padding:1px 8px;font-weight:800;margin-left:4px;vertical-align:2px}
+.b-meta{font-size:12px;color:var(--ink-soft);font-weight:700;line-height:1.5}
+.b-desc{font-size:14px;margin:10px 0 0;line-height:1.7}
+.b-hint{
+  background:#FFF7E0;border:2px dashed var(--sun-deep);border-radius:14px;
+  padding:10px 12px;font-size:13px;margin-top:10px;line-height:1.6;
+}
+.b-hint b{color:var(--sun-deep)}
+.b-want{display:flex;align-items:center;gap:8px;margin-top:12px;flex-wrap:wrap}
+.b-want .lbl{font-size:13px;font-weight:800;color:var(--ink-soft)}
+.face{
+  min-width:64px;min-height:52px;border-radius:14px;
+  background:#F6F0DE;border:2px solid #E7DBBB;
+  font-size:13px;font-weight:800;color:var(--ink-soft);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;
+  padding:4px 8px;
+}
+.face .em{font-size:22px;line-height:1.2}
+.face.on{background:var(--mcolor,var(--sky));border-color:transparent;color:#fff}
+.b-actions{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.b-link{
+  display:inline-flex;align-items:center;justify-content:center;gap:4px;
+  min-height:44px;border-radius:12px;padding:6px 12px;
+  background:#F6F0DE;border:2px solid #E7DBBB;
+  font-size:13px;font-weight:800;color:var(--ink);text-decoration:none;
+}
+.b-pick{
+  min-height:44px;border-radius:12px;padding:6px 14px;
+  background:var(--sun);color:var(--ink);font-size:13px;font-weight:800;
+  box-shadow:0 3px 0 var(--sun-deep);
+}
+.b-pick.off{background:#F6F0DE;border:2px solid #E7DBBB;box-shadow:none;color:var(--ink-soft)}
+.b-memo{margin-top:12px}
+.b-memo textarea{
+  height:64px;font-size:14px;font-family:var(--font);
+  border:2px solid var(--line);border-radius:12px;padding:8px 10px;width:100%;
+}
+.b-memo .lbl{font-size:13px;font-weight:800;color:var(--ink-soft);display:block;margin-bottom:4px}
+.chosen-banner{
+  background:linear-gradient(120deg,#FFE28A,#FFC53D);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:14px 16px;margin-bottom:14px;
+  font-weight:800;text-align:center;font-size:16px;
+}
+.chosen-banner .sub{font-size:13px;font-weight:700;margin-top:2px}
+
 /* ---------- celebration ---------- */
 #celebrate{
   position:fixed;inset:0;background:rgba(255,249,236,.94);z-index:60;
@@ -291,6 +362,7 @@ textarea{
   <button class="tab" role="tab" aria-selected="true" data-tab="today">きょう</button>
   <button class="tab" role="tab" aria-selected="false" data-tab="list">しゅくだい</button>
   <button class="tab" role="tab" aria-selected="false" data-tab="cal">カレンダー</button>
+  <button class="tab" role="tab" aria-selected="false" data-tab="book">本えらび</button>
 </nav>
 
 <main>
@@ -308,6 +380,14 @@ textarea{
   <section id="view-cal" hidden>
     <div class="cal-wrap" id="calBody"></div>
     <p class="cal-note">🌞 が ついた日は しゅくだいを がんばった日だよ</p>
+  </section>
+
+  <section id="view-book" hidden>
+    <div class="notice">どくしょかんそう<ruby>文<rt>ぶん</rt></ruby>の <ruby>本<rt>ほん</rt></ruby>えらび！<br>
+      <span style="font-size:13px;font-weight:700">この4さつは「かだい<ruby>図書<rt>としょ</rt></ruby>」（<ruby>低学年<rt>ていがくねん</rt></ruby>の<ruby>部<rt>ぶ</rt></ruby>）だよ。よみたい<ruby>本<rt>ほん</rt></ruby>に かおを つけてね</span>
+    </div>
+    <div id="bookBody"></div>
+    <p class="cal-note">かんそう<ruby>文<rt>ぶん</rt></ruby>は チャレンジかだい（やらなくても OK）。かくときは「しゅくだい」タブの「どくしょかんそう<ruby>文<rt>ぶん</rt></ruby>」で すすめよう</p>
   </section>
 </main>
 
@@ -448,6 +528,10 @@ function fill(s){
   s.nick=s.nick||'';
   s.pin=s.pin||null;
   s.lastCelebrated=s.lastCelebrated||'';
+  s.book=s.book||{};                // 感想文の本えらび（追加キーのみ・既存データに影響なし）
+  s.book.want=s.book.want||{};      // bookId -> 2(よみたい)|1(ふつう)|0(うーん)
+  s.book.memo=s.book.memo||{};      // bookId -> おうちの人メモ
+  if(s.book.chosen===undefined)s.book.chosen=null;
   // 旧データ移行：かんぺき64ページ → こくご30＋さんすう30（実物は全60項目）
   Object.keys(s.done).forEach(k=>{
     if(k.startsWith('kanpeki:')){
@@ -839,11 +923,101 @@ function renderCal(){
   body.appendChild(monthGrid(2026,8,{showStamps:true,dotFn:planDots}));
 }
 
+/* ================= render: book (かんそう文の本えらび) ================= */
+// 第72回青少年読書感想文全国コンクール課題図書（小学校低学年の部）
+// 出典: 全国学校図書館協議会 公式リスト。あらすじ・ヒントはこのアプリ用に書き下ろしたもの
+const BOOKS=[
+  {id:'makochan',title:'まこちゃんとコトバロボ',kind:'ものがたり',
+   author:'むらかみしいこ さく／たんじあきこ え',pub:'佼成出版社・1,540円',
+   isbn:'4333029449',color:'#E85C8A',
+   desc:'しゅくだいが きらいな まこちゃんの ところに、なんでも こたえてくれる「コトバロボ」が やってきた！ ぜんぶ ロボットに まかせて いいのかな…？ 「じぶんで まなぶって どういうこと？」を かんがえる おはなし。',
+   hint:'<b>こんな子にピッタリ：</b>ロボットや AI が すきな子、べんきょうを がんばりたい子<br><b>かきやすさ：</b>「じぶんだったら ロボットに たのむ？」と、じぶんの べんきょうと くらべて かきやすいよ'},
+  {id:'iikoto',title:'なにかいいことあった？',kind:'えほん（ほんやく）',
+   author:'ミーシャ・アーチャー さく／いしづちひろ やく',pub:'BL出版・1,870円',
+   isbn:'4776411474',color:'#35A7DE',
+   desc:'おじいちゃんに「なにか いいこと さがしてごらん」と いわれた ダニエル。とりや 木や かぜと であいながら、まいにちの 中に ある ちいさな「いいこと」を みつけていく えほん。',
+   hint:'<b>こんな子にピッタリ：</b>やさしい えが すきな子、おさんぽや しぜんが すきな子<br><b>かきやすさ：</b>「じぶんの きょうの いいこと」を さがして かけるよ。えにっきとも つながる テーマ'},
+  {id:'lala',title:'ララのまほうのことば',kind:'えほん（ほんやく）',
+   author:'グレーシー・ジャン さく／やのあやこ やく',pub:'工学図書・1,980円',
+   isbn:'4769205147',color:'#37A169',
+   desc:'げんきいっぱい、どろんこの ララ。こころを こめて やさしく よびかけると、まわりの せかいが いきいきと かわっていく。「やさしい ことば」の まほうの おはなし。',
+   hint:'<b>こんな子にピッタリ：</b>おともだちや かぞくとの ことばを たいせつに したい子<br><b>かきやすさ：</b>「ありがとう」など、いわれて うれしかった ことばの おもいでと つなげやすいよ'},
+  {id:'tane',title:'たねはいのちのおわりとはじまり',kind:'しゃしんえほん（かがく）',
+   author:'すずきじゅん ちょ',pub:'ブロンズ新社・1,540円',
+   isbn:'4893097474',color:'#FFB03A',
+   desc:'たねから めが 出て、花が さいて、かれて、また たねに なる。たくさんの しゃしんで「いのちの めぐり」を たしかめられる かがくの えほん。',
+   hint:'<b>こんな子にピッタリ：</b>草花や 虫など、しぜんの かんさつが すきな子<br><b>かきやすさ：</b>なつやすみに ほんものの たねを さがして、みつけた ことも かくと せかいに 1つだけの かんそう文に なるよ'},
+];
+function renderBook(){
+  const body=document.getElementById('bookBody');
+  body.innerHTML='';
+  const chosen=state.book.chosen;
+  const cb=chosen&&BOOKS.find(x=>x.id===chosen);
+  if(cb){
+    const ban=document.createElement('div');
+    ban.className='chosen-banner';
+    ban.innerHTML='📖 この本に きめた！<br>「'+cb.title+'」<div class="sub">「しゅくだい」タブの どくしょかんそう文で すすめよう</div>';
+    body.appendChild(ban);
+  }
+  BOOKS.forEach(b=>{
+    const picked=chosen===b.id;
+    const want=state.book.want[b.id];
+    const card=document.createElement('div');
+    card.className='book-card'+(picked?' picked':'');
+    card.style.setProperty('--mcolor',b.color);
+    const img='https://images-na.ssl-images-amazon.com/images/P/'+b.isbn+'.09.LZZZZZZZ.jpg';
+    card.innerHTML=
+      '<div class="b-top">'+
+        '<div class="b-cover"><img src="'+img+'" alt="『'+b.title+'』の ひょうし" loading="lazy">'+
+          '<span class="ph"><span class="bic">📖</span>'+b.title+'</span></div>'+
+        '<div class="b-info">'+
+          '<h3 class="b-title">'+b.title+(picked?'<span class="b-badge">きめた！</span>':'')+'</h3>'+
+          '<div class="b-meta">'+b.kind+'<br>'+b.author+'<br>'+b.pub+'</div>'+
+        '</div>'+
+      '</div>'+
+      '<p class="b-desc">'+b.desc+'</p>'+
+      '<div class="b-hint">'+b.hint+'</div>'+
+      '<div class="b-want"><span class="lbl">よみたい？</span>'+
+        [['2','😍','よみたい'],['1','🙂','ふつう'],['0','😐','うーん']].map(f=>
+          '<button class="face'+(String(want)===f[0]?' on':'')+'" data-w="'+f[0]+'"><span class="em">'+f[1]+'</span>'+f[2]+'</button>').join('')+
+      '</div>'+
+      '<div class="b-actions">'+
+        '<a class="b-link" href="https://www.amazon.co.jp/dp/'+b.isbn+'" target="_blank" rel="noopener">🛒 Amazonで<ruby>見<rt>み</rt></ruby>る</a>'+
+        '<a class="b-link" href="https://www.amazon.co.jp/product-reviews/'+b.isbn+'" target="_blank" rel="noopener">💬 レビューを<ruby>見<rt>み</rt></ruby>る</a>'+
+        '<button class="b-pick'+(picked?' off':'')+'">'+(picked?'きめたを とりけす':'この本に きめた！')+'</button>'+
+      '</div>'+
+      '<div class="b-memo"><label class="lbl" for="memo-'+b.id+'">おうちの人メモ</label>'+
+        '<textarea id="memo-'+b.id+'" placeholder="れい：としょかんで かりた／よみきかせたら よろこんだ"></textarea></div>';
+    // 表紙が取れないときは色つきのプレースホルダ表紙へ（Amazonは画像なしだと1x1画像を返す）
+    const cover=card.querySelector('.b-cover'),im=cover.querySelector('img');
+    const fail=()=>cover.classList.add('noimg');
+    im.addEventListener('error',fail);
+    im.addEventListener('load',()=>{if(im.naturalWidth<=1)fail();});
+    if(im.complete&&im.naturalWidth<=1)fail();
+    card.querySelectorAll('.face').forEach(f=>{
+      f.addEventListener('click',()=>{
+        const w=Number(f.dataset.w);
+        if(state.book.want[b.id]===w)delete state.book.want[b.id];
+        else state.book.want[b.id]=w;
+        save();renderBook();
+      });
+    });
+    card.querySelector('.b-pick').addEventListener('click',()=>{
+      state.book.chosen=picked?null:b.id;
+      save();renderBook();
+    });
+    const ta=card.querySelector('textarea');
+    ta.value=state.book.memo[b.id]||'';
+    ta.addEventListener('input',()=>{state.book.memo[b.id]=ta.value.slice(0,300);save();});
+    body.appendChild(card);
+  });
+}
+
 /* ================= tabs ================= */
 document.querySelectorAll('.tab').forEach(tab=>{
   tab.addEventListener('click',()=>{
     document.querySelectorAll('.tab').forEach(x=>x.setAttribute('aria-selected',x===tab));
-    ['today','list','cal'].forEach(v=>{
+    ['today','list','cal','book'].forEach(v=>{
       document.getElementById('view-'+v).hidden=(tab.dataset.tab!==v);
     });
   });
@@ -1129,7 +1303,7 @@ function stopConfetti(){
 }
 
 /* ================= boot ================= */
-function renderAll(){renderHeader();renderToday();renderList();renderCal();}
+function renderAll(){renderHeader();renderToday();renderList();renderCal();renderBook();}
 renderAll();
 setSyncStatus('off');
 if(syncConfigured()){
