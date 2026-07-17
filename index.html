@@ -1,0 +1,1085 @@
+<meta charset="utf-8">
+<title>なつやすみ がんばりカード</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<style>
+:root{
+  --paper:#FFF9EC;
+  --card:#FFFFFF;
+  --ink:#23445D;
+  --ink-soft:#5E7A93;
+  --sky:#35A7DE;
+  --sky-deep:#1E7DB4;
+  --sun:#FFC53D;
+  --sun-deep:#E8A400;
+  --melon:#FF6F61;
+  --leaf:#37A169;
+  --line:#F0E4C8;
+  --shadow:0 3px 0 rgba(35,68,93,.12);
+  --radius:20px;
+  --font:'Hiragino Maru Gothic ProN','Zen Maru Gothic','BIZ UDPGothic','Noto Sans JP','Yu Gothic',sans-serif;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{
+  font-family:var(--font);
+  background:var(--paper);
+  color:var(--ink);
+  font-size:17px;
+  line-height:1.6;
+}
+button{font-family:var(--font);cursor:pointer;border:none;background:none;color:inherit}
+button:focus-visible,input:focus-visible{outline:3px solid var(--sky);outline-offset:2px}
+input{font-family:var(--font)}
+ruby rt{font-size:.5em;color:var(--ink-soft)}
+
+/* ---------- header ---------- */
+header{
+  background:linear-gradient(160deg,#5FC1EC 0%,#35A7DE 70%);
+  color:#fff;
+  padding:14px 16px 18px;
+  position:relative;
+  overflow:hidden;
+}
+header::before{ /* sun */
+  content:"";
+  position:absolute;top:-38px;right:-38px;
+  width:120px;height:120px;border-radius:50%;
+  background:radial-gradient(circle,#FFE28A 0%,#FFC53D 60%,rgba(255,197,61,0) 72%);
+}
+.head-row{display:flex;align-items:center;gap:10px;position:relative}
+.avatar-btn{
+  width:52px;height:52px;border-radius:50%;
+  background:#fff;box-shadow:var(--shadow);
+  font-size:28px;line-height:1;flex:none;
+  display:flex;align-items:center;justify-content:center;
+}
+.head-title{flex:1;min-width:0}
+.head-title h1{margin:0;font-size:19px;font-weight:800;letter-spacing:.02em;text-shadow:0 1px 0 rgba(30,125,180,.5)}
+.head-title .nick{font-size:13px;opacity:.95}
+.gear-btn{
+  flex:none;background:rgba(255,255,255,.22);border-radius:14px;
+  padding:8px 12px;font-size:13px;font-weight:700;color:#fff;
+  min-height:48px;
+}
+.overall{margin-top:12px;position:relative}
+.overall-label{display:flex;justify-content:space-between;font-size:13px;font-weight:700;margin-bottom:4px}
+.bar{height:18px;background:rgba(255,255,255,.35);border-radius:9px;overflow:hidden}
+.bar>i{display:block;height:100%;background:linear-gradient(90deg,var(--sun) 0%,#FFDE7A 100%);border-radius:9px;transition:width .5s ease}
+
+/* ---------- tabs ---------- */
+nav{
+  display:flex;gap:8px;padding:12px 12px 4px;max-width:760px;margin:0 auto;
+}
+.tab{
+  flex:1;min-height:52px;border-radius:16px;
+  background:var(--card);box-shadow:var(--shadow);
+  font-size:16px;font-weight:800;color:var(--ink-soft);
+  border:2px solid transparent;
+}
+.tab[aria-selected="true"]{color:#fff;background:var(--sky);border-color:var(--sky-deep)}
+
+main{max-width:760px;margin:0 auto;padding:10px 12px 90px}
+section[hidden]{display:none}
+
+/* ---------- today ---------- */
+.today-date{
+  text-align:center;font-size:15px;font-weight:800;color:var(--ink-soft);
+  margin:8px 0 2px;
+}
+.today-hero{
+  text-align:center;font-size:22px;font-weight:800;margin:0 0 12px;
+  text-wrap:balance;
+}
+.notice{
+  background:#FFF3D6;border:2px dashed var(--sun-deep);border-radius:var(--radius);
+  padding:14px 16px;font-size:15px;font-weight:700;text-align:center;margin-bottom:12px;
+}
+.mission{
+  background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:14px 16px;margin-bottom:12px;
+  display:flex;align-items:center;gap:12px;
+  border-left:10px solid var(--mcolor,var(--sky));
+  position:relative;
+}
+.mission.done-card{background:#F3FBF3}
+.m-icon{font-size:34px;flex:none}
+.m-body{flex:1;min-width:0}
+.m-name{font-weight:800;font-size:16px}
+.m-quota{font-size:14px;color:var(--ink-soft);font-weight:700}
+.m-dots{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap}
+.m-dots i{
+  width:16px;height:16px;border-radius:50%;
+  background:#EDE5CF;display:inline-block;
+}
+.m-dots i.on{background:var(--sun)}
+.m-btn{
+  flex:none;min-width:96px;min-height:56px;border-radius:18px;
+  background:var(--sun);color:var(--ink);font-size:15px;font-weight:800;
+  box-shadow:0 4px 0 var(--sun-deep);
+  padding:6px 12px;
+}
+.m-btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--sun-deep)}
+.m-stamp{
+  flex:none;font-size:40px;min-width:96px;text-align:center;
+}
+.all-done{
+  text-align:center;padding:26px 16px;background:var(--card);
+  border-radius:var(--radius);box-shadow:var(--shadow);
+}
+.all-done .big{font-size:52px;line-height:1.2}
+.all-done p{font-size:19px;font-weight:800;margin:8px 0 0}
+
+/* ---------- list ---------- */
+.hw{
+  background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);
+  margin-bottom:12px;overflow:hidden;
+  border-left:10px solid var(--mcolor,var(--sky));
+}
+.hw-head{
+  width:100%;display:flex;align-items:center;gap:10px;
+  padding:12px 14px;text-align:left;min-height:64px;
+}
+.hw-icon{font-size:30px;flex:none}
+.hw-tit{flex:1;min-width:0}
+.hw-name{font-weight:800;font-size:16px}
+.hw-sub{font-size:12.5px;color:var(--ink-soft);font-weight:700}
+.hw-meta{flex:none;text-align:right}
+.hw-count{font-weight:800;font-size:15px;font-variant-numeric:tabular-nums}
+.hw-due{font-size:12px;color:var(--melon);font-weight:800}
+.hw-bar{height:10px;background:#F2EAD4;margin:0 14px}
+.hw-bar{border-radius:5px;overflow:hidden}
+.hw-bar>i{display:block;height:100%;background:var(--mcolor,var(--sky));transition:width .4s}
+.hw-body{padding:12px 14px 16px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{
+  min-width:48px;min-height:48px;border-radius:14px;
+  background:#F6F0DE;border:2px solid #E7DBBB;
+  font-size:15px;font-weight:800;color:var(--ink-soft);
+  padding:4px 10px;
+}
+.chip.on{
+  background:var(--mcolor,var(--sky));border-color:transparent;color:#fff;
+}
+.chip.wide{flex:1 1 100%;text-align:left;padding:10px 14px}
+.badge-opt{
+  font-size:11px;background:var(--melon);color:#fff;border-radius:8px;
+  padding:1px 8px;font-weight:800;vertical-align:2px;margin-left:6px;
+}
+.arrow{flex:none;font-size:14px;color:var(--ink-soft);transition:transform .2s}
+.hw.open .arrow{transform:rotate(90deg)}
+
+/* ---------- calendar ---------- */
+.cal-wrap{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
+.cal{
+  background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:14px;flex:1 1 320px;max-width:370px;
+}
+.cal h3{margin:0 0 8px;text-align:center;font-size:16px}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.cal-grid .dow{font-size:11px;font-weight:800;text-align:center;color:var(--ink-soft)}
+.cal-grid .dow.sun{color:var(--melon)} .cal-grid .dow.sat{color:var(--sky)}
+.day{
+  aspect-ratio:1;border-radius:12px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;font-size:12px;font-weight:700;
+  background:#FBF5E4;color:var(--ink-soft);position:relative;
+}
+.day.out{background:transparent}
+.day .stamp{font-size:17px;line-height:1}
+.day.today{outline:3px solid var(--sun);outline-offset:-3px}
+.day.rest{background:#E8F4FB;color:var(--sky-deep)}
+.day.rest::after{content:"やすみ";font-size:8px;font-weight:800}
+.day.plansel{color:#fff;font-weight:800}
+.day.plansel::after{content:"やる日";font-size:8px;font-weight:800}
+.pdots{display:flex;gap:2px;position:absolute;bottom:3px;left:50%;transform:translateX(-50%)}
+.pdots i{width:6px;height:6px;border-radius:50%;display:block}
+.cal-note{text-align:center;font-size:13px;color:var(--ink-soft);margin-top:10px}
+
+/* ---------- celebration ---------- */
+#celebrate{
+  position:fixed;inset:0;background:rgba(255,249,236,.94);z-index:60;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:20px;
+}
+#celebrate[hidden]{display:none}
+#celebrate .hanamaru{font-size:110px;line-height:1;animation:pop .5s ease}
+#celebrate h2{font-size:26px;margin:10px 0 4px}
+#celebrate p{font-size:16px;font-weight:700;color:var(--ink-soft);margin:0 0 22px}
+#celebrate button{
+  background:var(--sky);color:#fff;font-size:17px;font-weight:800;
+  border-radius:18px;padding:14px 34px;box-shadow:0 4px 0 var(--sky-deep);
+  min-height:56px;
+}
+@keyframes pop{0%{transform:scale(.2)}70%{transform:scale(1.15)}100%{transform:scale(1)}}
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:59}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+
+/* ---------- modal / parent ---------- */
+.modal{
+  position:fixed;inset:0;background:rgba(35,68,93,.45);z-index:70;
+  display:flex;align-items:flex-start;justify-content:center;
+  overflow-y:auto;padding:24px 12px;
+}
+.modal[hidden]{display:none}
+.panel{
+  background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);
+  width:100%;max-width:560px;padding:20px;
+}
+.panel h2{margin:0 0 4px;font-size:19px}
+.panel h3{font-size:15px;margin:22px 0 8px;border-left:6px solid var(--sun);padding-left:8px}
+.panel .close-row{display:flex;justify-content:flex-end;margin-top:18px}
+.btn{
+  background:var(--sky);color:#fff;font-weight:800;font-size:15px;
+  border-radius:14px;padding:10px 18px;min-height:48px;
+  box-shadow:0 3px 0 var(--sky-deep);
+}
+.btn.gray{background:#8FA3B5;box-shadow:0 3px 0 #6B8093}
+.btn.red{background:var(--melon);box-shadow:0 3px 0 #D14A3D}
+.btn.small{min-height:44px;padding:6px 14px;font-size:14px}
+.field{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+.field label{font-size:14px;font-weight:700;flex:1 1 180px}
+.field input[type=date],.field input[type=number],.field input[type=text]{
+  font-size:16px;padding:8px 10px;border:2px solid var(--line);border-radius:10px;
+  min-height:44px;
+}
+.field input[type=number]{width:90px}
+.hint{font-size:12.5px;color:var(--ink-soft);margin:4px 0 12px}
+.pin-input{font-size:26px;letter-spacing:.4em;width:160px;text-align:center;
+  padding:8px;border:2px solid var(--line);border-radius:12px}
+.toggle{
+  display:inline-flex;align-items:center;gap:8px;min-height:48px;
+  background:#F6F0DE;border-radius:14px;padding:6px 14px;font-weight:800;font-size:14px;
+  border:2px solid #E7DBBB;color:var(--ink-soft);
+}
+.toggle.on{background:var(--leaf);color:#fff;border-color:transparent}
+.mini-cal-note{font-size:12.5px;color:var(--ink-soft)}
+textarea{
+  width:100%;height:110px;font-size:12px;font-family:monospace;
+  border:2px solid var(--line);border-radius:10px;padding:8px;
+}
+.avatar-list{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.avatar-list button{
+  width:56px;height:56px;border-radius:50%;font-size:28px;
+  background:#F6F0DE;border:3px solid transparent;
+}
+.avatar-list button.sel{border-color:var(--sun);background:#FFF3D6}
+.warn{font-size:13px;font-weight:800;color:var(--melon)}
+@media (min-width:700px){
+  body{font-size:18px}
+  .head-title h1{font-size:22px}
+}
+</style>
+
+<header>
+  <div class="head-row">
+    <button class="avatar-btn" id="avatarBtn" aria-label="アイコンをかえる">🐯</button>
+    <div class="head-title">
+      <h1>なつやすみ がんばりカード</h1>
+      <div class="nick"><span id="nickView">がんばるひと：？？？</span><span id="syncDot" title=""></span></div>
+    </div>
+    <button class="gear-btn" id="gearBtn">おうちの人<br>せってい</button>
+  </div>
+  <div class="overall">
+    <div class="overall-label"><span>ぜんぶの すすみぐあい</span><span id="overallPct">0%</span></div>
+    <div class="bar"><i id="overallBar" style="width:0%"></i></div>
+  </div>
+</header>
+
+<nav role="tablist">
+  <button class="tab" role="tab" aria-selected="true" data-tab="today">きょう</button>
+  <button class="tab" role="tab" aria-selected="false" data-tab="list">しゅくだい</button>
+  <button class="tab" role="tab" aria-selected="false" data-tab="cal">カレンダー</button>
+</nav>
+
+<main>
+  <section id="view-today">
+    <p class="today-date" id="todayDate"></p>
+    <h2 class="today-hero" id="todayHero">きょうの ミッション！</h2>
+    <div id="todayBody"></div>
+  </section>
+
+  <section id="view-list" hidden>
+    <div class="notice">しゅくだいは <ruby>9月<rt>くがつ</rt></ruby>1日（<ruby>火<rt>か</rt></ruby>）に がっこうへ もっていくよ</div>
+    <div id="listBody"></div>
+  </section>
+
+  <section id="view-cal" hidden>
+    <div class="cal-wrap" id="calBody"></div>
+    <p class="cal-note">🌞 が ついた日は しゅくだいを がんばった日だよ</p>
+  </section>
+</main>
+
+<canvas id="confetti"></canvas>
+<div id="celebrate" hidden>
+  <div class="hanamaru">💮</div>
+  <h2 id="celebTitle">きょうのぶん ぜんぶ かんぺき！</h2>
+  <p id="celebSub">すごい！ あしたも がんばろうね</p>
+  <button id="celebClose">やったー！</button>
+</div>
+
+<!-- avatar / nickname -->
+<div class="modal" id="avatarModal" hidden>
+  <div class="panel">
+    <h2>じぶんの マークを えらぼう</h2>
+    <div class="avatar-list" id="avatarList"></div>
+    <div class="field">
+      <label for="nickInput">ニックネーム</label>
+      <input type="text" id="nickInput" maxlength="10" placeholder="れい：なつまる">
+    </div>
+    <p class="warn">※ ほんとうの<ruby>名<rt>な</rt></ruby>まえは 入れないでね！</p>
+    <div class="close-row"><button class="btn" id="avatarSave">きめた！</button></div>
+  </div>
+</div>
+
+<!-- family code (sync) -->
+<div class="modal" id="familyModal" hidden>
+  <div class="panel" style="max-width:440px">
+    <h2>かぞくの あいことば</h2>
+    <p class="hint">同じ「あいことば」を入れた端末どうしで、チェックが自動でつながります。<strong>最初の1台では「新しくつくる」</strong>、2台目からは同じあいことばを入力してください。名前や個人情報は入れないでください。</p>
+    <div class="field"><button class="btn" id="famNew">新しくつくる</button></div>
+    <div class="field">
+      <input type="text" id="famInput" placeholder="れい：natsu-a1b2c3" autocapitalize="off" autocomplete="off"
+        style="flex:1;font-size:16px;padding:8px 10px;border:2px solid var(--line);border-radius:10px;min-height:44px">
+      <button class="btn small" id="famJoin">これでつなぐ</button>
+    </div>
+    <p class="warn" id="famMsg" hidden></p>
+    <div class="close-row"><button class="btn gray" id="famClose">とじる</button></div>
+  </div>
+</div>
+
+<!-- PIN -->
+<div class="modal" id="pinModal" hidden>
+  <div class="panel" style="max-width:360px;text-align:center">
+    <h2 id="pinTitle">おうちの人の ばんごう</h2>
+    <p class="hint" id="pinHint">4けたの数字を入れてください</p>
+    <input class="pin-input" id="pinInput" inputmode="numeric" maxlength="4" autocomplete="off">
+    <p class="warn" id="pinErr" hidden>ばんごうが ちがうよ</p>
+    <div class="close-row" style="justify-content:center;gap:10px">
+      <button class="btn gray" id="pinCancel">やめる</button>
+      <button class="btn" id="pinOk">OK</button>
+    </div>
+  </div>
+</div>
+
+<!-- parent panel -->
+<div class="modal" id="parentModal" hidden>
+  <div class="panel">
+    <h2>おうちの人 せってい</h2>
+    <p class="hint">この画面は保護者用です。名前などの個人情報は入力しないでください。</p>
+
+    <h3>しめきり（この日までに終わらせる目標）</h3>
+    <p class="hint">1日の量は「残り ÷ 残り日数」で毎日自動計算されます。学校への提出日は9/1（火）です。</p>
+    <div id="deadlineFields"></div>
+
+    <h3>まとめて「済み」にする</h3>
+    <p class="hint">すでに終わっている番号・ページまでを一括で済みにできます（今日の分にはカウントされません）。</p>
+    <div id="bulkFields"></div>
+
+    <h3>チャレンジ課題（任意提出）</h3>
+    <div class="field" id="optToggles"></div>
+
+    <h3>おやすみの日（旅行・帰省など）</h3>
+    <p class="mini-cal-note">タップした日は「きょうのミッション」がお休みになります。</p>
+    <div class="cal-wrap" id="restCal" style="margin-top:8px"></div>
+
+    <h3>やる日プラン（やる日をこちらで決める）</h3>
+    <p class="hint">宿題を選んでから、カレンダーの日をタップしてください。プランを入れた宿題は<strong>選んだ日だけ</strong>ミッションに出ます（量は残りを予定日で等分）。何も選ばない宿題は、これまで通り毎日自動でわりふられます。</p>
+    <div class="chips" id="planHwChips"></div>
+    <p class="mini-cal-note" id="planInfo" style="margin-top:8px"></p>
+    <div class="cal-wrap" id="planCal" style="margin-top:8px"></div>
+    <div class="field" style="margin-top:8px">
+      <button class="btn small gray" id="planClear">この宿題のプランを消す（自動にもどす）</button>
+    </div>
+
+    <div id="syncSection">
+      <h3>同期（あいことば）</h3>
+      <p class="hint" id="famInfo"></p>
+      <div class="field"><button class="btn small gray" id="famChange">あいことばを入れ直す</button></div>
+    </div>
+
+    <h3>データのバックアップ</h3>
+    <p class="hint">下の文字列を控えておくと、データが消えたときに復元できます。</p>
+    <textarea id="backupArea" spellcheck="false"></textarea>
+    <div class="field" style="margin-top:8px">
+      <button class="btn small" id="backupCopy">コピーする</button>
+      <button class="btn small gray" id="backupLoad">貼り付けた内容で復元</button>
+    </div>
+
+    <h3>ぜんぶ消す</h3>
+    <div class="field">
+      <button class="btn small red" id="resetBtn">最初からやり直す（全データ削除）</button>
+    </div>
+
+    <div class="close-row"><button class="btn" id="parentClose">とじる</button></div>
+  </div>
+</div>
+
+<script>
+'use strict';
+/* ================= data ================= */
+const LS_KEY='natsu2026';
+const SUMMER_START='2026-07-18';
+const SUMMER_END='2026-08-31';
+const DEFAULT_DEADLINE='2026-08-31';
+const AVATARS=['🐯','🐰','🐼','🦁','🐸','🦊','🐢','🐬','🦖','🐝'];
+
+let state=load();
+function load(){
+  try{
+    const s=JSON.parse(localStorage.getItem(LS_KEY));
+    if(s&&typeof s==='object')return fill(s);
+  }catch(e){}
+  return fill({});
+}
+function fill(s){
+  s.done=s.done||{};                // key "hwid:idx" -> "YYYY-MM-DD" or "bulk"
+  s.deadlines=s.deadlines||{};
+  s.plan=s.plan||{};                // hwid -> ["YYYY-MM-DD", ...] やる日プラン
+  s.rest=s.rest||[];
+  s.opt=s.opt||{kansobun:true,shiraberu:true};
+  s.avatar=s.avatar||'🐯';
+  s.nick=s.nick||'';
+  s.pin=s.pin||null;
+  s.lastCelebrated=s.lastCelebrated||'';
+  // 旧データ移行：かんぺき64ページ → こくご30＋さんすう30（実物は全60項目）
+  Object.keys(s.done).forEach(k=>{
+    if(k.startsWith('kanpeki:')){
+      const i=Number(k.split(':')[1]);
+      const nk=i<30?'kanpeki_koku:'+i:(i<60?'kanpeki_san:'+(i-30):null);
+      if(nk&&!s.done[nk])s.done[nk]=s.done[k];
+      delete s.done[k];
+    }
+  });
+  if(s.deadlines.kanpeki){
+    s.deadlines.kanpeki_koku=s.deadlines.kanpeki_koku||s.deadlines.kanpeki;
+    s.deadlines.kanpeki_san=s.deadlines.kanpeki_san||s.deadlines.kanpeki;
+    delete s.deadlines.kanpeki;
+  }
+  if(s.plan.kanpeki){
+    s.plan.kanpeki_koku=s.plan.kanpeki_koku||s.plan.kanpeki;
+    s.plan.kanpeki_san=s.plan.kanpeki_san||s.plan.kanpeki.slice();
+    delete s.plan.kanpeki;
+  }
+  delete s.pages;
+  return s;
+}
+function save(){localStorage.setItem(LS_KEY,JSON.stringify(state));schedulePush();}
+
+/* ================= sync (Firebase Realtime Database REST) ================= */
+// デプロイ時に実際のデータベースURLへ置き換える。未設定なら従来どおり端末内のみ。
+const SYNC_DB='https://natsu-card-default-rtdb.asia-southeast1.firebasedatabase.app';
+const FAM_KEY='natsu2026_family';
+const syncConfigured=()=>SYNC_DB.indexOf('https')===0;
+const syncEnabled=()=>syncConfigured()&&!!getFamily();
+function getFamily(){return localStorage.getItem(FAM_KEY)||'';}
+function setFamily(c){localStorage.setItem(FAM_KEY,c);}
+function famUrl(){return SYNC_DB.replace(/\/+$/,'')+'/families/'+encodeURIComponent(getFamily())+'.json';}
+let lastRemoteTs=0,pushTimer=null,applyingRemote=false,syncState='off';
+function setSyncStatus(st){
+  syncState=st;
+  const el=document.getElementById('syncDot');
+  el.textContent=st==='ok'?' ☁✓':st==='err'?' ☁！':'';
+  el.title=st==='ok'?'同期できています':st==='err'?'同期エラー（電波を確認してください）':'';
+}
+function schedulePush(){
+  if(!syncEnabled()||applyingRemote)return;
+  clearTimeout(pushTimer);
+  pushTimer=setTimeout(pushState,800);
+}
+async function pushState(){
+  if(!syncEnabled())return;
+  try{
+    const ts=Date.now();
+    const r=await fetch(famUrl(),{method:'PUT',body:JSON.stringify({ts,state})});
+    if(!r.ok)throw new Error(r.status);
+    lastRemoteTs=ts;setSyncStatus('ok');
+  }catch(e){setSyncStatus('err');}
+}
+async function pullState(){
+  if(!syncEnabled())return;
+  try{
+    const r=await fetch(famUrl());
+    if(!r.ok)throw new Error(r.status);
+    const j=await r.json();
+    setSyncStatus('ok');
+    if(j&&j.ts&&j.ts>lastRemoteTs){
+      lastRemoteTs=j.ts;
+      applyingRemote=true;
+      state=fill(j.state||{});
+      localStorage.setItem(LS_KEY,JSON.stringify(state));
+      applyingRemote=false;
+      renderAll();
+    }
+    return j;
+  }catch(e){setSyncStatus('err');return null;}
+}
+setInterval(pullState,15000);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)pullState();});
+
+function homeworks(){
+  const H=[
+    {id:'kanpeki_koku',name:'かんぺき！なつ休み こくご',sub:'30こ ○つけ・なおしまで',icon:'📗',unit:'こ',count:30,color:'#37A169'},
+    {id:'kanpeki_san',name:'かんぺき！なつ休み さんすう',sub:'30こ ○つけ・なおしまで',icon:'📘',unit:'こ',count:30,color:'#4C7DDE'},
+    {id:'kanji',name:'かん字ドリル',sub:'50ばんまで',icon:'✏️',unit:'ばん',count:50,color:'#FF6F61'},
+    {id:'keisan',name:'けいさんぐんぐん',sub:'29ばんまで',icon:'🔢',unit:'ばん',count:29,color:'#35A7DE'},
+    {id:'dokusho',name:'どくしょカード',sub:'めざせ 20さつ！',icon:'📚',unit:'さつ',count:20,color:'#9C6ADE'},
+    {id:'enikki',name:'夏のえにっき',sub:'2日ぶん かくよ',icon:'🖍️',unit:'まい',labels:['1日目','2日目'],color:'#FFB03A'},
+    {id:'tanken',name:'町たんけんカード',sub:'お店を 1つ しらべる',icon:'🔍',labels:['お店を きめて カードに かく'],color:'#2FB5A0'},
+    {id:'kansobun',name:'どくしょかんそう文',sub:'げんこうようし 2まいと2行',icon:'📝',labels:['本を よむ','したがきを かく','せいしょを かく'],color:'#E85C8A',optional:true},
+    {id:'shiraberu',name:'しらべる学しゅう',sub:'コンクールに チャレンジ',icon:'🔬',labels:['テーマを きめる','しらべる','まとめる'],color:'#7A8B3A',optional:true},
+  ];
+  return H.filter(h=>!h.optional||state.opt[h.id]);
+}
+function units(h){return h.labels?h.labels.length:h.count;}
+function unitLabel(h,i){return h.labels?h.labels[i]:String(i+1);}
+
+/* ================= dates ================= */
+function todayStr(){
+  const d=new Date();
+  return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+}
+function fmtJP(iso){
+  const [y,m,d]=iso.split('-').map(Number);
+  const dow='日月火水木金土'[new Date(y,m-1,d).getDay()];
+  return m+'月'+d+'日（'+dow+'）';
+}
+function eachDay(a,b,fn){ // inclusive iso range
+  let d=new Date(a+'T00:00:00');
+  const end=new Date(b+'T00:00:00');
+  while(d<=end){
+    const iso=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+    fn(iso,d);
+    d=new Date(d.getTime()+86400000);
+  }
+}
+function activeDays(a,b){ // non-rest days count in [a,b]
+  if(a>b)return 0;
+  let n=0;
+  eachDay(a,b,iso=>{if(!state.rest.includes(iso))n++;});
+  return n;
+}
+
+/* ================= progress ================= */
+function doneCount(h){
+  let n=0;
+  for(let i=0;i<units(h);i++)if(state.done[h.id+':'+i])n++;
+  return n;
+}
+function doneTodayCount(h){
+  const t=todayStr();let n=0;
+  for(let i=0;i<units(h);i++)if(state.done[h.id+':'+i]===t)n++;
+  return n;
+}
+function deadline(h){return state.deadlines[h.id]||DEFAULT_DEADLINE;}
+/* quota: expected cumulative by today (even spread over active days) minus already done before today */
+function quotaToday(h){
+  const t=todayStr();
+  if(state.rest.includes(t))return 0;
+  if(t<SUMMER_START)return 0;
+  const total=units(h),done=doneCount(h),doneToday=doneTodayCount(h);
+  const remainStart=total-(done-doneToday); // remaining as of this morning
+  if(remainStart<=0)return doneToday;
+  const dl=deadline(h);
+  // やる日プランがある宿題は、指定日だけミッションに出す（残りを予定日で等分）
+  const plan=(state.plan[h.id]||[]).filter(d=>!state.rest.includes(d));
+  if(plan.length){
+    const future=plan.filter(d=>d>=t);
+    if(!future.length)return remainStart;   // 予定日を過ぎても残っていたら毎日表示
+    if(!future.includes(t))return 0;        // きょうは予定日ではない
+    return Math.min(remainStart,Math.ceil(remainStart/future.length));
+  }
+  if(t>=dl)return remainStart; // しめきり当日以降は残り全部
+  const totalActive=Math.max(1,activeDays(SUMMER_START,dl));
+  const elapsed=Math.min(totalActive,activeDays(SUMMER_START,t));
+  // 切り捨てで均等配分：量の少ない宿題（えにっき等）が初日に集中しないようにする。
+  // 最終日には必ず expected=total になり、しめきりまでに全量が割り当てられる。
+  const expected=(elapsed>=totalActive)?total:Math.floor(elapsed/totalActive*total);
+  const q=Math.max(0,expected-(done-doneToday));
+  return Math.min(remainStart,q);
+}
+function overall(){
+  let t=0,d=0;
+  homeworks().forEach(h=>{t+=units(h);d+=doneCount(h);});
+  return t?Math.round(d/t*100):0;
+}
+
+/* ================= render: header ================= */
+function renderHeader(){
+  document.getElementById('avatarBtn').textContent=state.avatar;
+  document.getElementById('nickView').textContent='がんばるひと：'+(state.nick||'？？？');
+  const p=overall();
+  document.getElementById('overallPct').textContent=p+'%';
+  document.getElementById('overallBar').style.width=p+'%';
+}
+
+/* ================= render: today ================= */
+function renderToday(){
+  const t=todayStr();
+  document.getElementById('todayDate').textContent=fmtJP(t);
+  const body=document.getElementById('todayBody');
+  const hero=document.getElementById('todayHero');
+  body.innerHTML='';
+
+  if(t<SUMMER_START){
+    hero.textContent='なつやすみは 7月18日からだよ！';
+    body.innerHTML='<div class="all-done"><div class="big">🌻</div><p>じゅんびは バッチリ！<br>「しゅくだい」タブで なにが あるか みてみよう</p></div>';
+    return;
+  }
+  if(state.rest.includes(t)){
+    hero.textContent='きょうは おやすみの日！';
+    body.innerHTML='<div class="all-done"><div class="big">🍉</div><p>ゆっくり たのしんでね！</p></div>';
+    return;
+  }
+  hero.textContent='きょうの ミッション！';
+
+  let any=false,allDone=true;
+  homeworks().forEach(h=>{
+    const q=quotaToday(h);
+    if(q<=0)return;
+    any=true;
+    const dt=doneTodayCount(h);
+    const finished=dt>=q;
+    if(!finished)allDone=false;
+    const card=document.createElement('div');
+    card.className='mission'+(finished?' done-card':'');
+    card.style.setProperty('--mcolor',h.color);
+    const dots=Array.from({length:Math.min(q,12)},(_,i)=>'<i class="'+(i<dt?'on':'')+'"></i>').join('');
+    const quotaText=h.labels?'きょうは 「'+nextLabel(h)+'」':'きょうは '+q+h.unit;
+    card.innerHTML=
+      '<div class="m-icon">'+h.icon+'</div>'+
+      '<div class="m-body"><div class="m-name">'+h.name+'</div>'+
+      '<div class="m-quota">'+(finished?'きょうのぶん おわり！':quotaText+'（あと '+(q-dt)+'）')+'</div>'+
+      '<div class="m-dots">'+dots+'</div></div>'+
+      (finished
+        ?'<div class="m-stamp">💮</div>'
+        :'<button class="m-btn" data-hw="'+h.id+'">1つ<br>できた！</button>');
+    body.appendChild(card);
+  });
+
+  if(!any){
+    const p=overall();
+    body.innerHTML='<div class="all-done"><div class="big">'+(p>=100?'🏆':'🌻')+'</div><p>'+
+      (p>=100?'しゅくだい ぜんぶ かんぺき！！<br>さいこうの なつやすみだね！':'きょうの ミッションは ないよ！<br>すきなことを して すごそう')+'</p></div>';
+    return;
+  }
+  if(allDone){
+    const d=document.createElement('div');
+    d.className='all-done';
+    d.innerHTML='<div class="big">💮</div><p>きょうのぶん ぜんぶ かんぺき！</p>';
+    body.appendChild(d);
+  }
+  body.querySelectorAll('.m-btn').forEach(b=>{
+    b.addEventListener('click',()=>{checkNext(b.dataset.hw);});
+  });
+}
+function nextLabel(h){
+  for(let i=0;i<units(h);i++)if(!state.done[h.id+':'+i])return unitLabel(h,i);
+  return '';
+}
+function checkNext(id){
+  const h=homeworks().find(x=>x.id===id);
+  if(!h)return;
+  for(let i=0;i<units(h);i++){
+    const k=h.id+':'+i;
+    if(!state.done[k]){
+      state.done[k]=todayStr();
+      save();
+      renderAll();
+      maybeCelebrate();
+      return;
+    }
+  }
+}
+function maybeCelebrate(){
+  const t=todayStr();
+  if(state.lastCelebrated===t)return;
+  const hs=homeworks().filter(h=>quotaToday(h)>0);
+  if(!hs.length)return;
+  if(hs.every(h=>doneTodayCount(h)>=quotaToday(h))){
+    state.lastCelebrated=t;save();
+    const done100=overall()>=100;
+    document.getElementById('celebTitle').textContent=done100?'しゅくだい ぜんぶ かんぺき！！':'きょうのぶん ぜんぶ かんぺき！';
+    document.getElementById('celebSub').textContent=done100?'ほんとうに よくがんばりました！':'すごい！ あしたも がんばろうね';
+    document.getElementById('celebrate').hidden=false;
+    confetti();
+  }
+}
+
+/* ================= render: list ================= */
+const openSet=new Set();
+function renderList(){
+  const body=document.getElementById('listBody');
+  body.innerHTML='';
+  homeworks().forEach(h=>{
+    const total=units(h),done=doneCount(h);
+    const wrap=document.createElement('div');
+    wrap.className='hw'+(openSet.has(h.id)?' open':'');
+    wrap.style.setProperty('--mcolor',h.color);
+    wrap.innerHTML=
+      '<button class="hw-head" aria-expanded="'+openSet.has(h.id)+'">'+
+        '<span class="hw-icon">'+h.icon+'</span>'+
+        '<span class="hw-tit"><span class="hw-name">'+h.name+
+          (h.optional?'<span class="badge-opt">チャレンジ</span>':'')+
+        '</span><br><span class="hw-sub">'+h.sub+'</span></span>'+
+        '<span class="hw-meta"><span class="hw-count">'+done+' / '+total+'</span><br>'+
+        '<span class="hw-due">'+((state.plan[h.id]||[]).length
+          ?'やる日 '+(state.plan[h.id]||[]).length+'日ぶん'
+          :'しめきり '+fmtJP(deadline(h)))+'</span></span>'+
+        '<span class="arrow">▶</span>'+
+      '</button>'+
+      '<div class="hw-bar"><i style="width:'+(total?done/total*100:0)+'%"></i></div>'+
+      '<div class="hw-body" '+(openSet.has(h.id)?'':'hidden')+'><div class="chips"></div></div>';
+    const chips=wrap.querySelector('.chips');
+    for(let i=0;i<total;i++){
+      const k=h.id+':'+i;
+      const c=document.createElement('button');
+      c.className='chip'+(state.done[k]?' on':'')+(h.labels?' wide':'');
+      c.textContent=(state.done[k]&&h.labels?'✅ ':'')+unitLabel(h,i)+(h.labels?'':'');
+      c.addEventListener('click',()=>{
+        if(state.done[k])delete state.done[k];
+        else state.done[k]=todayStr();
+        save();renderAll();maybeCelebrate();
+      });
+      chips.appendChild(c);
+    }
+    wrap.querySelector('.hw-head').addEventListener('click',()=>{
+      if(openSet.has(h.id))openSet.delete(h.id);else openSet.add(h.id);
+      renderList();
+    });
+    body.appendChild(wrap);
+  });
+}
+
+/* ================= render: calendar ================= */
+function stampDays(){
+  const s=new Set();
+  Object.values(state.done).forEach(v=>{if(/^\d{4}-/.test(v))s.add(v);});
+  return s;
+}
+function monthGrid(year,month,opts){ // month:1-12
+  opts=opts||{};
+  const stamps=opts.showStamps?stampDays():null;
+  const t=todayStr();
+  const cal=document.createElement('div');
+  cal.className='cal';
+  cal.innerHTML='<h3>'+month+'月</h3>';
+  const g=document.createElement('div');g.className='cal-grid';
+  ['日','月','火','水','木','金','土'].forEach((w,i)=>{
+    const d=document.createElement('div');
+    d.className='dow'+(i===0?' sun':i===6?' sat':'');
+    d.textContent=w;g.appendChild(d);
+  });
+  const first=new Date(year,month-1,1);
+  for(let i=0;i<first.getDay();i++){const e=document.createElement('div');e.className='day out';g.appendChild(e);}
+  const last=new Date(year,month,0).getDate();
+  for(let dd=1;dd<=last;dd++){
+    const iso=year+'-'+String(month).padStart(2,'0')+'-'+String(dd).padStart(2,'0');
+    const cell=document.createElement(opts.onTap?'button':'div');
+    cell.className='day';
+    const inSummer=iso>=SUMMER_START&&iso<=SUMMER_END;
+    if(!inSummer)cell.style.opacity=.35;
+    if(iso===t)cell.classList.add('today');
+    if(state.rest.includes(iso))cell.classList.add('rest');
+    if(opts.selFn&&opts.selFn(iso)){
+      cell.classList.add('plansel');
+      cell.style.background=opts.selColor||'var(--sky)';
+    }
+    let inner='<span>'+dd+'</span>';
+    if(stamps&&stamps.has(iso))inner+='<span class="stamp">🌞</span>';
+    if(opts.dotFn){
+      const cols=opts.dotFn(iso);
+      if(cols.length)inner+='<span class="pdots">'+cols.slice(0,4).map(c=>'<i style="background:'+c+'"></i>').join('')+'</span>';
+    }
+    cell.innerHTML=inner;
+    if(opts.onTap&&inSummer)cell.addEventListener('click',()=>opts.onTap(iso));
+    g.appendChild(cell);
+  }
+  cal.appendChild(g);
+  return cal;
+}
+function planDots(iso){
+  return homeworks().filter(h=>(state.plan[h.id]||[]).includes(iso)).map(h=>h.color);
+}
+function renderCal(){
+  const body=document.getElementById('calBody');
+  body.innerHTML='';
+  body.appendChild(monthGrid(2026,7,{showStamps:true,dotFn:planDots}));
+  body.appendChild(monthGrid(2026,8,{showStamps:true,dotFn:planDots}));
+}
+
+/* ================= tabs ================= */
+document.querySelectorAll('.tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.tab').forEach(x=>x.setAttribute('aria-selected',x===tab));
+    ['today','list','cal'].forEach(v=>{
+      document.getElementById('view-'+v).hidden=(tab.dataset.tab!==v);
+    });
+  });
+});
+
+/* ================= avatar ================= */
+const avatarModal=document.getElementById('avatarModal');
+document.getElementById('avatarBtn').addEventListener('click',()=>{
+  const list=document.getElementById('avatarList');
+  list.innerHTML='';
+  AVATARS.forEach(a=>{
+    const b=document.createElement('button');
+    b.textContent=a;
+    if(a===state.avatar)b.classList.add('sel');
+    b.addEventListener('click',()=>{
+      state.avatar=a;
+      list.querySelectorAll('button').forEach(x=>x.classList.toggle('sel',x===b));
+    });
+    list.appendChild(b);
+  });
+  document.getElementById('nickInput').value=state.nick;
+  avatarModal.hidden=false;
+});
+document.getElementById('avatarSave').addEventListener('click',()=>{
+  state.nick=document.getElementById('nickInput').value.trim().slice(0,10);
+  save();avatarModal.hidden=true;renderHeader();
+});
+
+/* ================= PIN & parent ================= */
+const pinModal=document.getElementById('pinModal');
+const parentModal=document.getElementById('parentModal');
+let pinMode='check';
+document.getElementById('gearBtn').addEventListener('click',()=>{
+  pinMode=state.pin?'check':'set';
+  document.getElementById('pinTitle').textContent=pinMode==='set'?'ばんごうを きめてください':'おうちの人の ばんごう';
+  document.getElementById('pinHint').textContent=pinMode==='set'
+    ?'保護者用画面のロック番号（4桁）を決めてください'
+    :'4けたの数字を入れてください';
+  document.getElementById('pinErr').hidden=true;
+  document.getElementById('pinInput').value='';
+  pinModal.hidden=false;
+  document.getElementById('pinInput').focus();
+});
+document.getElementById('pinCancel').addEventListener('click',()=>pinModal.hidden=true);
+document.getElementById('pinOk').addEventListener('click',()=>{
+  const v=document.getElementById('pinInput').value;
+  if(!/^\d{4}$/.test(v)){document.getElementById('pinErr').hidden=false;document.getElementById('pinErr').textContent='4けたの数字を入れてね';return;}
+  if(pinMode==='set'){state.pin=v;save();pinModal.hidden=true;openParent();}
+  else if(v===state.pin){pinModal.hidden=true;openParent();}
+  else{document.getElementById('pinErr').hidden=false;document.getElementById('pinErr').textContent='ばんごうが ちがうよ';}
+});
+document.getElementById('pinInput').addEventListener('keydown',e=>{
+  if(e.key==='Enter')document.getElementById('pinOk').click();
+});
+
+function openParent(){
+  // deadlines
+  const df=document.getElementById('deadlineFields');
+  df.innerHTML='';
+  homeworks().forEach(h=>{
+    const f=document.createElement('div');f.className='field';
+    f.innerHTML='<label>'+h.icon+' '+h.name+'</label>';
+    const inp=document.createElement('input');
+    inp.type='date';inp.min=SUMMER_START;inp.max='2026-09-01';
+    inp.value=deadline(h);
+    inp.addEventListener('change',()=>{state.deadlines[h.id]=inp.value||DEFAULT_DEADLINE;save();renderAll();});
+    f.appendChild(inp);
+    df.appendChild(f);
+  });
+  // bulk
+  const bf=document.getElementById('bulkFields');
+  bf.innerHTML='';
+  homeworks().filter(h=>!h.labels).forEach(h=>{
+    const f=document.createElement('div');f.className='field';
+    f.innerHTML='<label>'+h.icon+' '+h.name+'：ここまで済み</label>';
+    const inp=document.createElement('input');
+    inp.type='number';inp.min=0;inp.max=units(h);inp.value=bulkDone(h);
+    inp.addEventListener('change',()=>{
+      const n=Math.max(0,Math.min(units(h),Number(inp.value)||0));
+      for(let i=0;i<units(h);i++){
+        const k=h.id+':'+i;
+        if(i<n){if(!state.done[k])state.done[k]='bulk';}
+        else if(state.done[k]==='bulk')delete state.done[k];
+      }
+      save();renderAll();
+    });
+    f.appendChild(inp);
+    const u=document.createElement('span');u.textContent=h.unit;f.appendChild(u);
+    bf.appendChild(f);
+  });
+  // optional toggles
+  const ot=document.getElementById('optToggles');
+  ot.innerHTML='';
+  [['kansobun','📝 どくしょかんそう文'],['shiraberu','🔬 しらべる学しゅうコンクール']].forEach(([id,label])=>{
+    const b=document.createElement('button');
+    b.className='toggle'+(state.opt[id]?' on':'');
+    b.textContent=label+(state.opt[id]?'：やる':'：やらない');
+    b.addEventListener('click',()=>{state.opt[id]=!state.opt[id];save();openParent();renderAll();});
+    ot.appendChild(b);
+  });
+  // rest cal
+  const rc=document.getElementById('restCal');
+  rc.innerHTML='';
+  const tap=iso=>{
+    const i=state.rest.indexOf(iso);
+    if(i>=0)state.rest.splice(i,1);else state.rest.push(iso);
+    save();openParent();renderAll();
+  };
+  rc.appendChild(monthGrid(2026,7,{onTap:tap}));
+  rc.appendChild(monthGrid(2026,8,{onTap:tap}));
+  // plan UI
+  renderPlanUI();
+  // backup
+  document.getElementById('backupArea').value=JSON.stringify(state);
+  renderFamInfo();
+  parentModal.hidden=false;
+}
+let planSelId=null;
+function renderPlanUI(){
+  const hs=homeworks();
+  if(!planSelId||!hs.find(h=>h.id===planSelId))planSelId=hs[0].id;
+  const h=hs.find(x=>x.id===planSelId);
+  const chips=document.getElementById('planHwChips');
+  chips.innerHTML='';
+  hs.forEach(h2=>{
+    const b=document.createElement('button');
+    b.className='chip'+(h2.id===planSelId?' on':'');
+    b.style.setProperty('--mcolor',h2.color);
+    const p2=(state.plan[h2.id]||[]).length;
+    b.textContent=h2.icon+' '+h2.name+(p2?'（'+p2+'日）':'');
+    b.addEventListener('click',()=>{planSelId=h2.id;renderPlanUI();});
+    chips.appendChild(b);
+  });
+  const plan=state.plan[h.id]||[];
+  const remain=units(h)-doneCount(h);
+  document.getElementById('planInfo').textContent=plan.length
+    ?h.name+'：'+plan.length+'日えらんでいます。残り'+remain+(h.unit||'こ')+'を予定日で等分します。'
+    :h.name+'：プランなし（毎日自動わりふり）。日をタップすると「やる日」になります。';
+  const pc=document.getElementById('planCal');
+  pc.innerHTML='';
+  const tap=iso=>{
+    const arr=state.plan[planSelId]||(state.plan[planSelId]=[]);
+    const i=arr.indexOf(iso);
+    if(i>=0)arr.splice(i,1);else arr.push(iso);
+    arr.sort();
+    if(!arr.length)delete state.plan[planSelId];
+    save();renderPlanUI();renderAll();
+  };
+  const opts={onTap:tap,selFn:iso=>plan.includes(iso),selColor:h.color};
+  pc.appendChild(monthGrid(2026,7,opts));
+  pc.appendChild(monthGrid(2026,8,opts));
+}
+document.getElementById('planClear').addEventListener('click',()=>{
+  if(planSelId){delete state.plan[planSelId];save();renderPlanUI();renderAll();}
+});
+function bulkDone(h){
+  let n=0;
+  for(let i=0;i<units(h);i++){if(state.done[h.id+':'+i])n++;else break;}
+  return n;
+}
+document.getElementById('parentClose').addEventListener('click',()=>parentModal.hidden=true);
+document.getElementById('backupCopy').addEventListener('click',e=>{
+  const ta=document.getElementById('backupArea');
+  ta.select();
+  navigator.clipboard?.writeText(ta.value).catch(()=>{});
+  try{document.execCommand('copy');}catch(err){}
+  e.target.textContent='コピーしました';
+  setTimeout(()=>e.target.textContent='コピーする',1500);
+});
+document.getElementById('backupLoad').addEventListener('click',()=>{
+  try{
+    const s=JSON.parse(document.getElementById('backupArea').value);
+    if(!s||typeof s!=='object'||!s.done)throw 0;
+    state=fill(s);save();renderAll();openParent();
+    alert('復元しました');
+  }catch(e){alert('データの形式が正しくありません');}
+});
+document.getElementById('resetBtn').addEventListener('click',()=>{
+  if(confirm('チェックした記録もすべて消えます。（同期中の場合は他の端末からも消えます）本当に最初からやり直しますか？')){
+    localStorage.removeItem(LS_KEY);
+    state=fill({});
+    save();
+    parentModal.hidden=true;
+    renderAll();
+  }
+});
+
+/* ===== family code UI ===== */
+const familyModal=document.getElementById('familyModal');
+function famMsg(t){const el=document.getElementById('famMsg');el.hidden=!t;el.textContent=t||'';}
+document.getElementById('famNew').addEventListener('click',()=>{
+  const code='natsu-'+Math.random().toString(36).slice(2,8);
+  setFamily(code);
+  document.getElementById('famInput').value=code;
+  pushState();
+  famMsg('↑この あいことばで つながりました。メモしておいて、2台目でも同じものを入れてください。');
+  renderFamInfo();
+});
+document.getElementById('famJoin').addEventListener('click',async()=>{
+  const v=document.getElementById('famInput').value.trim().toLowerCase();
+  if(!/^[a-z0-9-]{4,30}$/.test(v)){famMsg('あいことばは 半角えいすうじ4〜30文字で入れてください');return;}
+  setFamily(v);
+  lastRemoteTs=0;
+  const j=await pullState();
+  if(!j||!j.ts)pushState();   // まだ誰も使っていないあいことば → この端末の内容を送る
+  famMsg('つながりました！');
+  renderFamInfo();
+});
+document.getElementById('famClose').addEventListener('click',()=>familyModal.hidden=true);
+document.getElementById('famChange').addEventListener('click',()=>{
+  document.getElementById('famInput').value=getFamily();
+  famMsg('');
+  familyModal.hidden=false;
+});
+function renderFamInfo(){
+  const sec=document.getElementById('syncSection');
+  if(!syncConfigured()){sec.style.display='none';return;}
+  sec.style.display='';
+  document.getElementById('famInfo').textContent=getFamily()
+    ?'いまの あいことば：'+getFamily()+'（同じあいことばの端末と自動同期します）'
+    :'まだ設定されていません。「あいことばを入れ直す」から設定してください。';
+}
+
+/* ================= celebrate / confetti ================= */
+document.getElementById('celebClose').addEventListener('click',()=>{
+  document.getElementById('celebrate').hidden=true;
+  stopConfetti();
+});
+let confettiRAF=null;
+function confetti(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  const cv=document.getElementById('confetti');
+  const ctx=cv.getContext('2d');
+  cv.width=innerWidth;cv.height=innerHeight;
+  const colors=['#FFC53D','#FF6F61','#35A7DE','#37A169','#E85C8A'];
+  const ps=Array.from({length:90},()=>({
+    x:Math.random()*cv.width,y:-20-Math.random()*cv.height*.5,
+    r:5+Math.random()*6,c:colors[Math.floor(Math.random()*colors.length)],
+    vy:2+Math.random()*3,vx:(Math.random()-.5)*2,rot:Math.random()*6.28,vr:(Math.random()-.5)*.2
+  }));
+  const start=performance.now();
+  function tick(now){
+    ctx.clearRect(0,0,cv.width,cv.height);
+    ps.forEach(p=>{
+      p.y+=p.vy;p.x+=p.vx;p.rot+=p.vr;
+      ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot);
+      ctx.fillStyle=p.c;ctx.fillRect(-p.r/2,-p.r/2,p.r,p.r*1.4);
+      ctx.restore();
+    });
+    if(now-start<4000)confettiRAF=requestAnimationFrame(tick);
+    else ctx.clearRect(0,0,cv.width,cv.height);
+  }
+  confettiRAF=requestAnimationFrame(tick);
+}
+function stopConfetti(){
+  if(confettiRAF)cancelAnimationFrame(confettiRAF);
+  const cv=document.getElementById('confetti');
+  cv.getContext('2d').clearRect(0,0,cv.width,cv.height);
+}
+
+/* ================= boot ================= */
+function renderAll(){renderHeader();renderToday();renderList();renderCal();}
+renderAll();
+setSyncStatus('off');
+if(syncConfigured()){
+  if(!getFamily())familyModal.hidden=false;   // 初回はあいことば設定から
+  else pullState();
+}
+</script>
