@@ -1182,7 +1182,7 @@ function renderBook(){
 
 /* ================= essay (かんそう文ワークシート) ================= */
 // AI整形プロキシ（Cloudflare Worker）。未設定なら端末内の簡易整形のみで動く。
-const AI_PROXY='__AI_PROXY_URL__';
+const AI_PROXY='https://kansobun-ai.sakanonaoki-paper-reader.workers.dev';
 const aiReady=()=>AI_PROXY.indexOf('https')===0;
 const REPL_KEY='natsu2026_replace';   // いいかえ設定：この端末のみ・同期しない
 
