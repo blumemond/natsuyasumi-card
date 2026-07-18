@@ -78,7 +78,8 @@ nav{
   border:2px solid transparent;padding:0 2px;
 }
 .tab[aria-selected="true"]{color:#fff;background:var(--sky);border-color:var(--sky-deep)}
-@media (max-width:430px){nav{gap:5px}.tab{font-size:13px;border-radius:13px}}
+@media (max-width:430px){nav{gap:4px;padding:12px 8px 4px}.tab{font-size:12px;border-radius:13px;padding:0}}
+@media (max-width:350px){.tab{font-size:11px}}
 
 main{max-width:760px;margin:0 auto;padding:10px 12px 90px}
 section[hidden]{display:none}
@@ -283,6 +284,69 @@ section[hidden]{display:none}
 }
 .chosen-banner .sub{font-size:13px;font-weight:700;margin-top:2px}
 
+/* ---------- essay (かんそう文ワークシート) ---------- */
+.eq-card{
+  background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);
+  padding:14px;margin-bottom:14px;border-left:10px solid var(--mcolor,var(--sky));
+}
+.eq-stage{
+  display:inline-block;font-size:11px;font-weight:800;color:#fff;
+  background:var(--mcolor,var(--sky));border-radius:8px;padding:1px 10px;margin-bottom:4px;
+}
+.eq-q{font-size:16px;font-weight:800;margin:0 0 6px;line-height:1.55;text-wrap:balance}
+.eq-hint{
+  background:#FFF7E0;border:2px dashed var(--sun-deep);border-radius:12px;
+  padding:8px 10px;font-size:12.5px;line-height:1.6;margin-bottom:8px;
+}
+.eq-ta{
+  width:100%;height:96px;font-size:15px;font-family:var(--font);line-height:1.7;
+  border:2px solid var(--line);border-radius:12px;padding:8px 10px;
+}
+.eq-row{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;align-items:center}
+.mic-btn{
+  min-height:52px;border-radius:14px;padding:6px 16px;
+  background:var(--sky);color:#fff;font-size:14px;font-weight:800;
+  box-shadow:0 3px 0 var(--sky-deep);
+}
+.mic-btn.rec{background:var(--melon);box-shadow:0 3px 0 #D14A3D;animation:recblink 1.2s infinite}
+@keyframes recblink{50%{opacity:.72}}
+.tidy-btn{
+  min-height:44px;border-radius:12px;padding:6px 12px;
+  background:#F6F0DE;border:2px solid #E7DBBB;font-size:13px;font-weight:800;color:var(--ink-soft);
+}
+.eq-status{font-size:12px;font-weight:700;color:var(--ink-soft)}
+.interim{
+  background:#EFF7FC;border:2px dashed #9CCBE6;border-radius:12px;
+  padding:8px 10px;font-size:14px;color:var(--sky-deep);margin-top:8px;min-height:24px;
+}
+.idea-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;margin-bottom:4px}
+.idea-chip{
+  display:inline-flex;align-items:center;gap:4px;max-width:100%;
+  background:#FDF1F6;border:2px solid #F2C4D8;border-radius:14px;
+  padding:8px 6px 8px 12px;font-size:14px;font-weight:700;line-height:1.4;
+}
+.idea-chip button{font-size:15px;color:var(--melon);font-weight:800;padding:2px 8px;min-height:32px}
+.essay-print-row{text-align:center;margin:18px 0 6px}
+.print-btn{
+  min-height:56px;border-radius:16px;padding:10px 22px;
+  background:var(--leaf);color:#fff;font-size:15px;font-weight:800;box-shadow:0 4px 0 #257A4C;
+}
+#printArea{display:none}
+@media print{
+  header,nav,main,#confetti,#celebrate,.modal{display:none!important}
+  body{background:#fff;color:#000}
+  #printArea{display:block}
+  #printArea .pr-head{font-size:15px;font-weight:800;margin:0 0 4px}
+  #printArea .pr-note{font-size:10.5px;margin:0 0 12px;line-height:1.6}
+  #printArea .pr-cards{display:flex;flex-wrap:wrap;gap:6mm}
+  #printArea .pr-card{
+    width:46%;border:2px dashed #999;border-radius:8px;padding:5mm;
+    page-break-inside:avoid;box-sizing:border-box;
+  }
+  #printArea .pr-label{font-size:11px;font-weight:800;margin:0 0 2mm;color:#333}
+  #printArea .pr-text{font-size:13px;line-height:1.9;margin:0;white-space:pre-wrap}
+}
+
 /* ---------- celebration ---------- */
 #celebrate{
   position:fixed;inset:0;background:rgba(255,249,236,.94);z-index:60;
@@ -380,6 +444,7 @@ textarea{
   <button class="tab" role="tab" aria-selected="false" data-tab="list">しゅくだい</button>
   <button class="tab" role="tab" aria-selected="false" data-tab="cal">カレンダー</button>
   <button class="tab" role="tab" aria-selected="false" data-tab="book">本えらび</button>
+  <button class="tab" role="tab" aria-selected="false" data-tab="essay">かんそう文</button>
 </nav>
 
 <main>
@@ -404,10 +469,20 @@ textarea{
       <span style="font-size:13px;font-weight:700">この4さつは「かだい<ruby>図書<rt>としょ</rt></ruby>」（<ruby>低学年<rt>ていがくねん</rt></ruby>の<ruby>部<rt>ぶ</rt></ruby>）だよ。よみたい<ruby>本<rt>ほん</rt></ruby>に かおを つけてね</span>
     </div>
     <div id="bookBody"></div>
-    <p class="cal-note">かんそう<ruby>文<rt>ぶん</rt></ruby>は チャレンジかだい（やらなくても OK）。かくときは「しゅくだい」タブの「どくしょかんそう<ruby>文<rt>ぶん</rt></ruby>」で すすめよう</p>
+    <p class="cal-note">かんそう<ruby>文<rt>ぶん</rt></ruby>は チャレンジかだい（やらなくても OK）。<ruby>本<rt>ほん</rt></ruby>を きめたら「かんそう<ruby>文<rt>ぶん</rt></ruby>」タブで ざいりょうを あつめよう</p>
+  </section>
+
+  <section id="view-essay" hidden>
+    <div class="notice" id="essayNotice"></div>
+    <div id="essayBody"></div>
+    <div class="essay-print-row">
+      <button class="print-btn" id="printBtn">🖨 ざいりょうカードを いんさつ</button>
+      <p class="cal-note">カードを きりとって、つかいたい カードを ならべてから かこう。<br>ぜんぶ つかわなくて いいよ。3〜4まいが めやすだよ！</p>
+    </div>
   </section>
 </main>
 
+<div id="printArea" aria-hidden="true"></div>
 <canvas id="confetti"></canvas>
 <div id="celebrate" hidden>
   <div class="hanamaru">💮</div>
@@ -500,6 +575,16 @@ textarea{
       <div class="field"><button class="btn small gray" id="famChange">あいことばを入れ直す</button></div>
     </div>
 
+    <h3>いいかえ ことば（かんそう文の音声入力）</h3>
+    <p class="hint">音声入力の文に入ってしまった名前などを、自動で別のことばに置きかえます（例: 名前 → わたし）。<strong>この設定はこの端末の中だけに保存され、同期にもAIにも送られません。</strong>ひらがな・カタカナ・漢字の表記ゆれは、それぞれ登録してください（「くん/ちゃん/さん」付きには自動で対応します）。</p>
+    <div id="replList"></div>
+    <div class="field">
+      <input type="text" id="replFrom" placeholder="おきかえる ことば" style="flex:1;min-width:130px">
+      <span>→</span>
+      <input type="text" id="replTo" placeholder="わたし" style="width:110px">
+      <button class="btn small" id="replAdd">追加</button>
+    </div>
+
     <h3>データのバックアップ</h3>
     <p class="hint">下の文字列を控えておくと、データが消えたときに復元できます。</p>
     <textarea id="backupArea" spellcheck="false"></textarea>
@@ -549,6 +634,9 @@ function fill(s){
   s.book.want=s.book.want||{};      // bookId -> 2(よみたい)|1(ふつう)|0(うーん)
   s.book.memo=s.book.memo||{};      // bookId -> おうちの人メモ
   if(s.book.chosen===undefined)s.book.chosen=null;
+  s.essay=s.essay||{};              // かんそう文ワークシート（追加キーのみ・既存データに影響なし）
+  s.essay.answers=s.essay.answers||{};             // q1..q7 -> 回答テキスト
+  if(!Array.isArray(s.essay.titleIdeas))s.essay.titleIdeas=[];  // だいめいの たね
   // 旧データ移行：かんぺき64ページ → こくご30＋さんすう30（実物は全60項目）
   Object.keys(s.done).forEach(k=>{
     if(k.startsWith('kanpeki:')){
@@ -1026,7 +1114,7 @@ function renderBook(){
   if(cb){
     const ban=document.createElement('div');
     ban.className='chosen-banner';
-    ban.innerHTML='📖 この本に きめた！<br>「'+cb.title+'」<div class="sub">「しゅくだい」タブの どくしょかんそう文で すすめよう</div>';
+    ban.innerHTML='📖 この本に きめた！<br>「'+cb.title+'」<div class="sub">「かんそう文」タブで ざいりょうを あつめよう</div>';
     body.appendChild(ban);
   }
   BOOKS.forEach(b=>{
@@ -1092,11 +1180,323 @@ function renderBook(){
   });
 }
 
+/* ================= essay (かんそう文ワークシート) ================= */
+// AI整形プロキシ（Cloudflare Worker）。未設定なら端末内の簡易整形のみで動く。
+const AI_PROXY='__AI_PROXY_URL__';
+const aiReady=()=>AI_PROXY.indexOf('https')===0;
+const REPL_KEY='natsu2026_replace';   // いいかえ設定：この端末のみ・同期しない
+
+// 小1(80字)＋小2(160字)の配当漢字
+const KANJI_OK=
+  '一右雨円王音下火花貝学気九休玉金空月犬見五口校左三山子四糸字耳七車手十出女小上森人水正生青夕石赤千川先早草足村大男竹中虫町天田土二日入年白八百文木本名目立力林六'+
+  '引羽雲園遠何科夏家歌画回会海絵外角楽活間丸岩顔汽記帰弓牛魚京強教近兄形計元言原戸古午後語工公広交光考行高黄合谷国黒今才細作算止市矢姉思紙寺自時室社弱首秋週春書少場色食心新親図数西声星晴切雪船線前組走多太体台地池知茶昼長鳥朝直通弟店点電刀冬当東答頭同道読内南肉馬売買麦半番父風分聞米歩母方北毎妹万明鳴毛門夜野友用曜来里理話';
+function kanjiViolations(t){
+  const bad=[];
+  for(const ch of String(t)){
+    if(/[一-鿿]/.test(ch)&&KANJI_OK.indexOf(ch)<0&&bad.indexOf(ch)<0)bad.push(ch);
+  }
+  return bad;
+}
+function getReplacePairs(){try{const a=JSON.parse(localStorage.getItem(REPL_KEY));return Array.isArray(a)?a:[];}catch(e){return[];}}
+function setReplacePairs(a){localStorage.setItem(REPL_KEY,JSON.stringify(a));}
+const escRe=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+function applyReplace(t){
+  t=String(t);
+  getReplacePairs().forEach(p=>{
+    if(!p.from)return;
+    t=t.replace(new RegExp(escRe(p.from)+'(くん|ちゃん|さん)?','g'),p.to||'わたし');
+  });
+  return t;
+}
+function localClean(t){
+  t=String(t);
+  t=t.replace(/(ええと|ええっと|えーと|えーっと|えっとー|えっと|あのー|あのう|うーんと|んーと)[、,]?/g,'');
+  t=t.replace(/(^|[、。\s])(えー|あー|うーん|んー)[、,]/g,'$1');
+  return t.replace(/^[、,]+/,'').replace(/、{2,}/g,'、');
+}
+async function aiClean(text){
+  const r=await fetch(AI_PROXY,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text})});
+  if(!r.ok)throw new Error(r.status);
+  const j=await r.json();
+  if(!j||typeof j.text!=='string'||!j.text)throw new Error('bad response');
+  return j.text;
+}
+// 処理順は固定: ①名前のいいかえ（端末内）→ ②AI整形（あれば）→ ③配当漢字チェック
+// ※名前はAIにもFirebaseにも送らないため、①を必ず最初に行う
+async function cleanupText(raw){
+  let t=applyReplace(String(raw));
+  if(aiReady()){
+    try{
+      t=await aiClean(t);
+      if(kanjiViolations(t).length)t=await aiClean(t);  // 範囲外漢字が残ったら一度だけやり直し
+      t=applyReplace(t);
+    }catch(e){t=localClean(t);}
+  }else{
+    t=localClean(t);
+  }
+  return t.trim();
+}
+
+const ESSAY_HINTS={
+  q2:{
+    makochan:'ことばで うれしかったり、いやな きもちに なったりした こと、ロボットの こと…しっている ことを はなしてみよう',
+    iikoto:'「いいこと」って どんなこと だとおもう？ きょうや きのうに あった いいことでも いいよ',
+    lala:'「まほうの ことば」って きいたこと ある？（ありがとう・ごめんね・だいじょうぶ など）',
+    tane:'たねや しょくぶつの こと、しっている ことを はなしてみよう（あさがおを そだてたこと ある？）',
+    _:'この本に でてきそうな ことで、しっている ことを はなしてみよう'
+  },
+  q6:{
+    makochan:'いわれて うれしかった ことば・かなしかった ことばは あった？',
+    iikoto:'きょう あった「ちいさな いいこと」を おもいだしてみよう',
+    lala:'だれかに やさしい ことばを いったこと・いわれたことは あった？',
+    tane:'あさがおや やさいを そだてたこと、たねを みつけたことは あった？',
+    _:'本と にたような ことが、じぶんにも あったか おもいだしてみよう'
+  }
+};
+const ESSAY_QS=[
+  {id:'q1',stage:'よむまえ',q:'ひょうしを 見て、どんな おはなしだと おもう？',hint:'ひょうしの えを よーく 見てから はなしてね'},
+  {id:'q2',stage:'よむまえ',q:'この本のことで、しっていることは ある？',hintBook:true},
+  {id:'q3',stage:'よんだあと',q:'よむまえの よそうと、どこが ちがった？',hint:'「〜だと おもってたけど、ほんとうは 〜だった」って いってみよう'},
+  {id:'q4',stage:'よんだあと',q:'いちばん びっくりしたことは？ どうして びっくりした？',hint:'びっくりした ページを ひらきながら はなすと いいよ'},
+  {id:'q5',stage:'よんだあと',q:'いちばん すきだった「ことば」は どれ？',hint:'本のなかの ことばを そのまま いってみよう。どうして すきかも いえたら すごい！'},
+  {id:'q6',stage:'よんだあと',q:'じぶんも にたような こと、あった？',hintBook:true},
+  {id:'q7',stage:'よんだあと',q:'よむまえと よんだあとで、かわったことは？ これから やってみたいことは？',hint:'「これからは 〜したい」まで いえたら かんぺき！'},
+];
+
+/* ---- 音声入力（Web Speech API・ライブラリ不要） ---- */
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+let recActive=null;   // {qid, rec, stopping, opts}
+function userStopRec(){
+  if(!recActive)return;
+  recActive.stopping=true;
+  try{recActive.rec.stop();}catch(e){}
+}
+function toggleRec(qid,opts){
+  if(recActive&&recActive.qid===qid){userStopRec();return;}
+  if(recActive)userStopRec();
+  if(!SR){alert('このブラウザでは 音声入力が つかえないよ。キーボードで 入れてね');return;}
+  const r=new SR();
+  r.lang='ja-JP';r.continuous=true;r.interimResults=true;
+  const st={qid,rec:r,stopping:false,opts};
+  recActive=st;
+  r.onresult=async ev=>{
+    let interim='';
+    for(let i=ev.resultIndex;i<ev.results.length;i++){
+      const res=ev.results[i];
+      if(res.isFinal){
+        const raw=res[0].transcript.trim();
+        if(raw){
+          opts.status('ことばを ととのえているよ…');
+          const t=await cleanupText(raw);
+          if(t)opts.final(t);
+          opts.status('');
+        }
+      }else interim+=res[0].transcript;
+    }
+    opts.interim(interim);
+  };
+  r.onerror=ev=>{
+    if(ev.error==='not-allowed'||ev.error==='service-not-allowed'){
+      st.stopping=true;
+      opts.status('マイクが つかえないみたい。おうちの人と せっていを 見てね');
+    }
+  };
+  r.onend=()=>{
+    if(recActive===st&&!st.stopping){try{r.start();}catch(e){}}  // 無音で切れても つづける
+    else if(recActive===st){recActive=null;opts.ui(false);opts.interim('');}
+  };
+  opts.ui(true);
+  try{r.start();}catch(e){recActive=null;opts.ui(false);}
+}
+
+/* ---- ワークシートUI ---- */
+let essayBuilt=false;
+function buildEssay(){
+  const body=document.getElementById('essayBody');
+  body.innerHTML='';
+  ESSAY_QS.forEach((q,i)=>{
+    const card=document.createElement('div');
+    card.className='eq-card';
+    card.style.setProperty('--mcolor',q.stage==='よむまえ'?'#37A169':'#35A7DE');
+    card.innerHTML=
+      '<span class="eq-stage">'+(i+1)+'．'+q.stage+'</span>'+
+      '<h3 class="eq-q">'+q.q+'</h3>'+
+      '<div class="eq-hint" id="hint-'+q.id+'"></div>'+
+      '<textarea class="eq-ta" id="ta-'+q.id+'" placeholder="🎤ボタンで はなして 入れられるよ"></textarea>'+
+      '<div class="eq-row">'+
+        '<button class="mic-btn" id="mic-'+q.id+'">🎤 はなして 入れる</button>'+
+        '<button class="tidy-btn" id="tidy-'+q.id+'">✨ ことばを ととのえる</button>'+
+        '<span class="eq-status" id="st-'+q.id+'"></span>'+
+      '</div>'+
+      '<div class="interim" id="int-'+q.id+'" hidden></div>';
+    body.appendChild(card);
+    const ta=card.querySelector('#ta-'+q.id);
+    ta.addEventListener('input',()=>{state.essay.answers[q.id]=ta.value.slice(0,1000);save();});
+    const intEl=card.querySelector('#int-'+q.id);
+    const stEl=card.querySelector('#st-'+q.id);
+    const micBtn=card.querySelector('#mic-'+q.id);
+    const opts={
+      final:t=>{
+        const cur=ta.value.trim();
+        ta.value=cur?cur+'\n'+t:t;
+        state.essay.answers[q.id]=ta.value.slice(0,1000);save();
+      },
+      interim:t=>{intEl.textContent=t;},
+      status:t=>{stEl.textContent=t;},
+      ui:on=>{
+        micBtn.classList.toggle('rec',on);
+        micBtn.textContent=on?'⏹ おわり':'🎤 はなして 入れる';
+        intEl.hidden=!on;
+        if(!on)stEl.textContent='';
+      }
+    };
+    micBtn.addEventListener('click',()=>toggleRec(q.id,opts));
+    card.querySelector('#tidy-'+q.id).addEventListener('click',async e=>{
+      const b=e.target;
+      if(!ta.value.trim()||b.disabled)return;
+      b.disabled=true;b.textContent='… ととのえちゅう';
+      const t=await cleanupText(ta.value);
+      ta.value=t;state.essay.answers[q.id]=t.slice(0,1000);save();
+      b.disabled=false;b.textContent='✨ ことばを ととのえる';
+    });
+  });
+  // Q8: だいめいの たね あつめ（アイデア出しだけ。1つに決めるUIはあえて置かない）
+  const card=document.createElement('div');
+  card.className='eq-card';
+  card.style.setProperty('--mcolor','#E85C8A');
+  card.innerHTML=
+    '<span class="eq-stage">8．さいご</span>'+
+    '<h3 class="eq-q">だいめいの たね あつめ 🌱</h3>'+
+    '<div class="eq-hint">だいめいの アイデアを たくさん あつめよう。きめるのは かくとき でいいよ！<br>'+
+      '① びっくりしたことを だいめいに　② よびかけみたいに（れい：「ざっそうさん、ごめんね」）　③ やってみたいことを だいめいに</div>'+
+    '<div class="idea-chips" id="ideaChips"></div>'+
+    '<div class="eq-row">'+
+      '<button class="mic-btn" id="mic-q8">🎤 はなして たす</button>'+
+      '<span class="eq-status" id="st-q8"></span>'+
+    '</div>'+
+    '<div class="interim" id="int-q8" hidden></div>'+
+    '<div class="eq-row">'+
+      '<input type="text" id="ideaInput" placeholder="キーボードでも たせるよ" style="flex:1;min-width:150px;font-size:15px;font-family:var(--font);padding:8px 10px;border:2px solid var(--line);border-radius:12px;min-height:48px">'+
+      '<button class="tidy-btn" id="ideaAdd">＋ たす</button>'+
+    '</div>';
+  body.appendChild(card);
+  const addIdea=t=>{
+    t=String(t).trim();
+    if(!t)return;
+    state.essay.titleIdeas.push(t.slice(0,60));
+    save();renderIdeaChips();
+  };
+  const intEl=card.querySelector('#int-q8'),stEl=card.querySelector('#st-q8'),micBtn=card.querySelector('#mic-q8');
+  const opts={
+    final:addIdea,
+    interim:t=>{intEl.textContent=t;},
+    status:t=>{stEl.textContent=t;},
+    ui:on=>{micBtn.classList.toggle('rec',on);micBtn.textContent=on?'⏹ おわり':'🎤 はなして たす';intEl.hidden=!on;if(!on)stEl.textContent='';}
+  };
+  micBtn.addEventListener('click',()=>toggleRec('q8',opts));
+  card.querySelector('#ideaAdd').addEventListener('click',()=>{
+    const inp=card.querySelector('#ideaInput');
+    addIdea(inp.value);inp.value='';
+  });
+}
+function renderIdeaChips(){
+  const box=document.getElementById('ideaChips');
+  if(!box)return;
+  box.innerHTML='';
+  state.essay.titleIdeas.forEach((t,i)=>{
+    const c=document.createElement('span');
+    c.className='idea-chip';
+    const txt=document.createElement('span');txt.textContent='🌱 '+t;
+    const del=document.createElement('button');del.textContent='✕';del.setAttribute('aria-label','このたねを けす');
+    del.addEventListener('click',()=>{state.essay.titleIdeas.splice(i,1);save();renderIdeaChips();});
+    c.appendChild(txt);c.appendChild(del);
+    box.appendChild(c);
+  });
+  if(!state.essay.titleIdeas.length){
+    const p=document.createElement('span');
+    p.className='eq-status';p.textContent='まだ たねが ないよ。おもいついたら 🎤で はなしてみよう';
+    box.appendChild(p);
+  }
+}
+function renderEssay(){
+  if(!essayBuilt){buildEssay();essayBuilt=true;}
+  const chosen=state.book.chosen;
+  ESSAY_QS.forEach(q=>{
+    const el=document.getElementById('hint-'+q.id);
+    if(el)el.textContent='💡 '+(q.hintBook?(ESSAY_HINTS[q.id][chosen]||ESSAY_HINTS[q.id]._):q.hint);
+    // 回答の反映（入力中・録音中の欄はさわらない）
+    const ta=document.getElementById('ta-'+q.id);
+    if(ta&&document.activeElement!==ta&&!(recActive&&recActive.qid===q.id)){
+      const v=state.essay.answers[q.id]||'';
+      if(ta.value!==v)ta.value=v;
+    }
+  });
+  renderIdeaChips();
+  const cb=chosen&&BOOKS.find(x=>x.id===chosen);
+  document.getElementById('essayNotice').innerHTML=cb
+    ?'📖 「'+cb.title+'」の かんそう<ruby>文<rt>ぶん</rt></ruby>の ざいりょうを あつめよう！<br><span style="font-size:13px;font-weight:700">🎤ボタンを おして、こえで はなして 入れてね（キーボードでも OK）</span>'
+    :'まずは「<ruby>本<rt>ほん</rt></ruby>えらび」タブで <ruby>本<rt>ほん</rt></ruby>を きめてね。<br><span style="font-size:13px;font-weight:700">きめたら ここで かんそう<ruby>文<rt>ぶん</rt></ruby>の ざいりょうを あつめよう！🎤で はなして 入れられるよ</span>';
+}
+
+/* ---- ざいりょうカード印刷 ---- */
+function escHtml(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+const PR_LABELS={q1:'よむまえの よそう',q2:'しっていたこと',q3:'よそうと ちがったところ',q4:'いちばん びっくりしたこと',q5:'すきだった ことば',q6:'じぶんの おはなし',q7:'かわったこと・やってみたいこと'};
+document.getElementById('printBtn').addEventListener('click',()=>{
+  const cb=state.book.chosen&&BOOKS.find(x=>x.id===state.book.chosen);
+  let cards='';let n=0;
+  ESSAY_QS.forEach(q=>{
+    const t=(state.essay.answers[q.id]||'').trim();
+    if(!t)return;
+    n++;
+    cards+='<div class="pr-card"><p class="pr-label">'+PR_LABELS[q.id]+'</p><p class="pr-text">'+escHtml(t)+'</p></div>';
+  });
+  if(state.essay.titleIdeas.length){
+    n++;
+    cards+='<div class="pr-card"><p class="pr-label">だいめいの たね（この中から えらんでも、あたらしく 考えても OK）</p><p class="pr-text">'+state.essay.titleIdeas.map(t=>'🌱 '+escHtml(t)).join('<br>')+'</p></div>';
+  }
+  if(!n){alert('まだ ざいりょうが ないよ。🎤で はなして あつめてみよう！');return;}
+  document.getElementById('printArea').innerHTML=
+    '<p class="pr-head">📖 かんそう文の ざいりょうカード'+(cb?'：『'+cb.title+'』':'')+'</p>'+
+    '<p class="pr-note">✂ カードを きりとって、つかいたい カードを ならべてから かこう。ぜんぶ つかわなくて いいよ（3〜4まいが めやす）。<br>'+
+    '（おうちの人へ）カードの並び順やつなぎ方はあえて示していません。お子さんが自分で考えて書けるよう、ことばを直しすぎないでください。本文は800字以内（原稿用紙2枚＋2行）です。</p>'+
+    '<div class="pr-cards">'+cards+'</div>';
+  window.print();
+});
+
+/* ---- いいかえ ことば設定（保護者） ---- */
+function renderReplList(){
+  const box=document.getElementById('replList');
+  box.innerHTML='';
+  const pairs=getReplacePairs();
+  if(!pairs.length){
+    const p=document.createElement('p');p.className='hint';p.textContent='まだ登録がありません。';
+    box.appendChild(p);
+    return;
+  }
+  pairs.forEach((p,i)=>{
+    const f=document.createElement('div');f.className='field';
+    const lab=document.createElement('label');lab.textContent=p.from+' → '+(p.to||'わたし');
+    const del=document.createElement('button');del.className='btn small gray';del.textContent='削除';
+    del.addEventListener('click',()=>{const a=getReplacePairs();a.splice(i,1);setReplacePairs(a);renderReplList();});
+    f.appendChild(lab);f.appendChild(del);
+    box.appendChild(f);
+  });
+}
+document.getElementById('replAdd').addEventListener('click',()=>{
+  const from=document.getElementById('replFrom').value.trim();
+  const to=document.getElementById('replTo').value.trim()||'わたし';
+  if(!from)return;
+  const a=getReplacePairs();a.push({from,to});setReplacePairs(a);
+  document.getElementById('replFrom').value='';
+  document.getElementById('replTo').value='';
+  renderReplList();
+});
+
 /* ================= tabs ================= */
 document.querySelectorAll('.tab').forEach(tab=>{
   tab.addEventListener('click',()=>{
     document.querySelectorAll('.tab').forEach(x=>x.setAttribute('aria-selected',x===tab));
-    ['today','list','cal','book'].forEach(v=>{
+    ['today','list','cal','book','essay'].forEach(v=>{
       document.getElementById('view-'+v).hidden=(tab.dataset.tab!==v);
     });
   });
@@ -1233,6 +1633,8 @@ function openParent(){
   });
   // plan UI
   renderPlanUI();
+  // いいかえ ことば
+  renderReplList();
   // backup
   document.getElementById('backupArea').value=JSON.stringify(state);
   renderFamInfo();
@@ -1382,7 +1784,7 @@ function stopConfetti(){
 }
 
 /* ================= boot ================= */
-function renderAll(){renderHeader();renderToday();renderList();renderCal();renderBook();}
+function renderAll(){renderHeader();renderToday();renderList();renderCal();renderBook();renderEssay();}
 renderAll();
 setSyncStatus('off');
 if(syncConfigured()){
