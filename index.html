@@ -299,8 +299,9 @@ section[hidden]{display:none}
   padding:8px 10px;font-size:12.5px;line-height:1.6;margin-bottom:8px;
 }
 .eq-ta{
-  width:100%;height:96px;font-size:15px;font-family:var(--font);line-height:1.7;
+  width:100%;min-height:96px;height:96px;font-size:15px;font-family:var(--font);line-height:1.7;
   border:2px solid var(--line);border-radius:12px;padding:8px 10px;
+  resize:none;overflow:hidden;   /* 高さは文字量にあわせてJSで自動調節 */
 }
 .eq-row{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;align-items:center}
 .mic-btn{
@@ -410,6 +411,7 @@ section[hidden]{display:none}
 textarea{
   width:100%;height:110px;font-size:12px;font-family:monospace;
   border:2px solid var(--line);border-radius:10px;padding:8px;
+  resize:vertical;   /* 横方向のリサイズはデザインが崩れるので全欄で禁止 */
 }
 .avatar-list{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
 .avatar-list button{
@@ -1310,6 +1312,11 @@ function toggleRec(qid,opts){
 }
 
 /* ---- ワークシートUI ---- */
+// 回答欄の高さを文字量にあわせて自動調節（手動リサイズは無効）
+function autoGrow(ta){
+  ta.style.height='auto';
+  ta.style.height=Math.max(96,ta.scrollHeight+4)+'px';
+}
 let essayBuilt=false;
 function buildEssay(){
   const body=document.getElementById('essayBody');
@@ -1331,7 +1338,7 @@ function buildEssay(){
       '<div class="interim" id="int-'+q.id+'" hidden></div>';
     body.appendChild(card);
     const ta=card.querySelector('#ta-'+q.id);
-    ta.addEventListener('input',()=>{state.essay.answers[q.id]=ta.value.slice(0,1000);save();});
+    ta.addEventListener('input',()=>{state.essay.answers[q.id]=ta.value.slice(0,1000);save();autoGrow(ta);});
     const intEl=card.querySelector('#int-'+q.id);
     const stEl=card.querySelector('#st-'+q.id);
     const micBtn=card.querySelector('#mic-'+q.id);
@@ -1340,6 +1347,7 @@ function buildEssay(){
         const cur=ta.value.trim();
         ta.value=cur?cur+'\n'+t:t;
         state.essay.answers[q.id]=ta.value.slice(0,1000);save();
+        autoGrow(ta);
       },
       interim:t=>{intEl.textContent=t;},
       status:t=>{stEl.textContent=t;},
@@ -1357,6 +1365,7 @@ function buildEssay(){
       b.disabled=true;b.textContent='… ととのえちゅう';
       const t=await cleanupText(ta.value);
       ta.value=t;state.essay.answers[q.id]=t.slice(0,1000);save();
+      autoGrow(ta);
       b.disabled=false;b.textContent='✨ ことばを ととのえる';
     });
   });
@@ -1428,7 +1437,7 @@ function renderEssay(){
     const ta=document.getElementById('ta-'+q.id);
     if(ta&&document.activeElement!==ta&&!(recActive&&recActive.qid===q.id)){
       const v=state.essay.answers[q.id]||'';
-      if(ta.value!==v)ta.value=v;
+      if(ta.value!==v){ta.value=v;autoGrow(ta);}
     }
   });
   renderIdeaChips();
@@ -1499,6 +1508,8 @@ document.querySelectorAll('.tab').forEach(tab=>{
     ['today','list','cal','book','essay'].forEach(v=>{
       document.getElementById('view-'+v).hidden=(tab.dataset.tab!==v);
     });
+    // 非表示中は高さ計算ができないため、表示された時点で回答欄の高さを合わせ直す
+    if(tab.dataset.tab==='essay')document.querySelectorAll('.eq-ta').forEach(autoGrow);
   });
 });
 
