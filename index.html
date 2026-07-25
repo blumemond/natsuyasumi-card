@@ -1085,9 +1085,12 @@ function renderProgChart(){
     s+='<line x1="'+PADL+'" y1="'+y+'" x2="'+(W-PADR)+'" y2="'+y+'" stroke="var(--line)" stroke-width="1"/>';
     s+='<text x="'+(PADL-4)+'" y="'+(Y(g)+3).toFixed(1)+'" text-anchor="end" font-size="9" fill="var(--ink-soft)">'+g+'</text>';
   });
-  [[0,'7/18'],[dayIndex('2026-08-01'),'8/1'],[endIdx,'8/31']].forEach(t=>{
-    s+='<text x="'+X(t[0]).toFixed(1)+'" y="'+(H-8)+'" text-anchor="middle" font-size="9" fill="var(--ink-soft)">'+t[1]+'</text>';
-  });
+  for(let i=0;i<=endIdx;i+=7){ // 1週間ごとの目盛り（7/18起点）
+    const d=new Date(new Date(SUMMER_START+'T00:00:00').getTime()+i*86400000);
+    const lab=(d.getMonth()+1)+'/'+d.getDate();
+    s+='<line x1="'+X(i).toFixed(1)+'" y1="'+(H-PADB)+'" x2="'+X(i).toFixed(1)+'" y2="'+(H-PADB+3)+'" stroke="var(--line)" stroke-width="1"/>';
+    s+='<text x="'+X(i).toFixed(1)+'" y="'+(H-8)+'" text-anchor="middle" font-size="9" fill="var(--ink-soft)">'+lab+'</text>';
+  }
   // 理想ペース（点線）
   s+='<line x1="'+X(0).toFixed(1)+'" y1="'+Y(baselinePct).toFixed(1)+'" x2="'+X(endIdx).toFixed(1)+'" y2="'+Y(100).toFixed(1)+'" stroke="var(--sun-deep)" stroke-width="2" stroke-dasharray="4 4" stroke-linecap="round"/>';
   // 実績（面＋折れ線）
