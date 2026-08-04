@@ -78,8 +78,8 @@ nav{
   border:2px solid transparent;padding:0 2px;
 }
 .tab[aria-selected="true"]{color:#fff;background:var(--sky);border-color:var(--sky-deep)}
-@media (max-width:430px){nav{gap:4px;padding:12px 8px 4px}.tab{font-size:12px;border-radius:13px;padding:0}}
-@media (max-width:350px){.tab{font-size:11px}}
+@media (max-width:430px){nav{gap:3px;padding:12px 6px 4px}.tab{font-size:11px;border-radius:12px;padding:0;letter-spacing:-.02em;line-height:1.15}}
+@media (max-width:360px){.tab{font-size:10px}}
 
 main{max-width:760px;margin:0 auto;padding:10px 12px 90px}
 section[hidden]{display:none}
@@ -393,6 +393,48 @@ section[hidden]{display:none}
   #printArea .pr-text{font-size:13px;line-height:1.9;margin:0;white-space:pre-wrap}
 }
 
+/* ---------- research (しらべる学しゅう ワークシート) ---------- */
+.rs-head{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:14px 16px;margin-bottom:12px}
+.rs-theme{font-size:13px;font-weight:700;color:var(--ink-soft);margin:0 0 8px;line-height:1.5}
+.rs-theme b{color:var(--ink);font-size:15px}
+.rs-prog-label{display:flex;justify-content:space-between;font-size:13px;font-weight:800;margin-bottom:4px}
+.rs-prog-label b{color:#5C6B2A}
+.rs-bar{height:14px;background:#EEE6CF;border-radius:7px;overflow:hidden}
+.rs-bar>i{display:block;height:100%;background:linear-gradient(90deg,#9BAE4A,#7A8B3A);border-radius:7px;transition:width .4s}
+.rs-stages{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.rs-stage-chip{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;font-weight:800;border-radius:10px;padding:3px 8px;background:#F6F0DE;color:var(--ink-soft);border:2px solid #E7DBBB}
+.rs-stage-chip.clear{background:#EAF7EF;color:#1E6E43;border-color:#B6E0C6}
+.rs-today{background:linear-gradient(120deg,#F2F6DE,#E4EFC4);border:2px solid #9BAE4A;border-radius:var(--radius);box-shadow:var(--shadow);padding:14px 16px;margin-bottom:12px}
+.rs-today .lab{font-size:12px;font-weight:800;color:#5C6B2A;margin:0 0 4px}
+.rs-today .task{font-size:17px;font-weight:800;margin:0 0 10px;text-wrap:balance;line-height:1.5}
+.rs-today .go{min-height:48px;border-radius:14px;padding:8px 18px;background:var(--leaf);color:#fff;font-size:14px;font-weight:800;box-shadow:0 3px 0 #257A4C}
+.rs-today .go:active{transform:translateY(2px);box-shadow:0 1px 0 #257A4C}
+.rs-week{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:12px 16px;margin-bottom:16px}
+.rs-week h4{margin:0 0 8px;font-size:14px}
+.rs-week ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:7px}
+.rs-week li{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:700;line-height:1.4}
+.rs-week li .n{flex:none;width:22px;height:22px;border-radius:50%;background:#F6F0DE;color:var(--ink-soft);font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.rs-stage-sec{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:12px;overflow:hidden;border-left:10px solid var(--mcolor,var(--sky))}
+.rs-stage-head{width:100%;display:flex;align-items:center;gap:10px;padding:12px 14px;text-align:left;min-height:56px}
+.rs-stage-head .ic{font-size:26px;flex:none}
+.rs-stage-head .ti{flex:1;min-width:0;font-weight:800;font-size:14.5px;line-height:1.4}
+.rs-stage-head .ct{flex:none;font-size:13px;font-weight:800;color:var(--ink-soft);font-variant-numeric:tabular-nums}
+.rs-stage-head .arrow{flex:none;font-size:14px;color:var(--ink-soft);transition:transform .2s}
+.rs-stage-sec.open .rs-stage-head .arrow{transform:rotate(90deg)}
+.rs-task{border-top:1.5px solid var(--line);padding:12px 14px}
+.rs-task.on{background:#F3FBF3}
+.rs-task-top{display:flex;align-items:flex-start;gap:10px}
+.rs-check{flex:none;width:42px;height:42px;border-radius:12px;background:#F6F0DE;border:2px solid #E7DBBB;font-size:20px;font-weight:800;display:flex;align-items:center;justify-content:center;color:var(--ink-soft)}
+.rs-check.on{background:var(--leaf);border-color:transparent;color:#fff}
+.rs-task-body{flex:1;min-width:0}
+.rs-task-t{font-weight:800;font-size:15px;line-height:1.5}
+.rs-done-mark{font-size:12px;color:var(--ink-soft);font-weight:700;margin-top:3px;line-height:1.5}
+.rs-done-mark::before{content:"🏁 "}
+.rs-hint{background:#FFF7E0;border:2px dashed var(--sun-deep);border-radius:12px;padding:7px 10px;font-size:12px;line-height:1.6;margin-top:8px}
+.rs-memo{margin-top:8px}
+.rs-memo .ph{font-size:11.5px;color:var(--ink-soft);font-weight:700;margin:0 0 4px;line-height:1.5}
+.rs-memo textarea{width:100%;min-height:64px;height:64px;font-size:15px;font-family:var(--font);line-height:1.7;border:2px solid var(--line);border-radius:12px;padding:8px 10px;resize:none;overflow:hidden}
+
 /* ---------- celebration ---------- */
 #celebrate{
   position:fixed;inset:0;background:rgba(255,249,236,.94);z-index:60;
@@ -492,6 +534,7 @@ textarea{
   <button class="tab" role="tab" aria-selected="false" data-tab="cal">カレンダー</button>
   <button class="tab" role="tab" aria-selected="false" data-tab="book">本えらび</button>
   <button class="tab" role="tab" aria-selected="false" data-tab="essay">かんそう文</button>
+  <button class="tab" role="tab" aria-selected="false" data-tab="research">しらべる</button>
 </nav>
 
 <main>
@@ -541,6 +584,13 @@ textarea{
       <button class="print-btn" id="printBtn">🖨 ざいりょうカードを いんさつ</button>
       <p class="cal-note">カードを きりとって、つかいたい カードを ならべてから かこう。<br>ぜんぶ つかわなくて いいよ。3〜4まいが めやすだよ！</p>
     </div>
+  </section>
+
+  <section id="view-research" hidden>
+    <div class="notice" id="researchNotice"></div>
+    <div id="researchTop"></div>
+    <div id="researchBody"></div>
+    <p class="cal-note">🎤ボタンで、はなして メモできるよ。<br>しゃしんや くわしい じゅうしょは アプリに 入れないでね（おうちの人が オフラインで かんりします）。</p>
   </section>
 </main>
 
@@ -699,6 +749,9 @@ function fill(s){
   s.essay=s.essay||{};              // かんそう文ワークシート（追加キーのみ・既存データに影響なし）
   s.essay.answers=s.essay.answers||{};             // q1..q7 -> 回答テキスト
   if(!Array.isArray(s.essay.titleIdeas))s.essay.titleIdeas=[];  // だいめいの たね
+  s.research=s.research||{};        // しらべる学しゅうワークシート（追加キーのみ・別トラッカー・既存の shiraberu 宿題には影響なし）
+  s.research.checks=s.research.checks||{};          // taskId "r1".."r21" -> true（できた）
+  s.research.memos=s.research.memos||{};            // taskId -> メモ本文
   // 旧データ移行：かんぺき64ページ → こくご30＋さんすう30（実物は全60項目）
   Object.keys(s.done).forEach(k=>{
     if(k.startsWith('kanpeki:')){
@@ -923,7 +976,7 @@ let viewDate=null; // 画面状態のみ（保存も同期もしない）。null
 function gotoDate(iso){ // カレンダーからその日の「きょう」画面へジャンプ
   viewDate=iso;
   document.querySelectorAll('.tab').forEach(x=>x.setAttribute('aria-selected',x.dataset.tab==='today'));
-  ['today','list','cal','book','essay'].forEach(v=>{document.getElementById('view-'+v).hidden=(v!=='today');});
+  ['today','list','cal','book','essay','research'].forEach(v=>{document.getElementById('view-'+v).hidden=(v!=='today');});
   renderToday();window.scrollTo(0,0);
 }
 function renderToday(){
@@ -1740,17 +1793,258 @@ document.getElementById('replAdd').addEventListener('click',()=>{
   renderReplList();
 });
 
+/* ================= research (しらべる学しゅう ワークシート) ================= */
+// 21タスク / 5ステージ。別トラッカー（state.research）で持ち、既存の shiraberu 宿題とは独立。
+// メモ欄は かんそう文と同じ音声整形パイプライン（toggleRec / cleanupText）を流用。
+const RESEARCH=[
+  {stage:'ふしぎを きめよう', icon:'💡', color:'#7A8B3A', tasks:[
+    {id:'r1', t:'QRコードを 見つけた ときの ことを 話す',
+      done:'見つけた ばしょ（ざっくり）と、その ときの きもちを 書けたら はなまる',
+      memo:'どこで 見つけた？ どんな きもち だった？'},
+    {id:'r2', t:'「何のために あるのか」を 3つ よそうする',
+      done:'よそうを 3つ 書けたら はなまる',
+      memo:'よそう① ／ よそう② ／ よそう③'},
+    {id:'r3', t:'けんきゅうの「問い」を 自分の ことばで 書く',
+      done:'「点字ブロックの QRコードは、何のために あるのか」を 自分の ことばで 書けたら はなまる',
+      memo:'わたしの 問い：',
+      hint:'だいめい（テーマ）は もう きまっているよ。それを 自分の ことばに して みよう'},
+  ]},
+  {stage:'本で しらべよう', icon:'📚', color:'#4C7DDE', tasks:[
+    {id:'r4', t:'本を 1さつ よんで「ひみつカード」に まとめる',
+      done:'「本の名前・わかったこと・びっくりしたこと・もっと知りたいこと」の 4つを 書けたら はなまる',
+      memo:'本の名前 ／ わかったこと ／ びっくり ／ もっと知りたい'},
+    {id:'r5', t:'もう1さつ か こうしきの しりょうで、あたらしく わかった ことを 3つ',
+      done:'あたらしい はっけんを 3つ 書けたら はなまる（本が すくなければ しりょうでも OK）',
+      memo:'あたらしい はっけん ① ／ ② ／ ③'},
+    {id:'r6', t:'点字ブロックの 2しゅるいを 絵に かく',
+      done:'線（せん）のブロック＝すすめ、点（てん）のブロック＝とまれ、の 絵を かけたら はなまる',
+      memo:'せんじょう（ゆうどう）と てんじょう（けいこく）の ちがい'},
+    {id:'r7', t:'わかった ことを「点字ブロック ひみつカード」に まとめる',
+      done:'点字ブロックに ついて わかった ことを 3つ 書けたら はなまる',
+      memo:'点字ブロックの ひみつ ① ／ ② ／ ③'},
+  ]},
+  {stage:'本ものを 見に 行こう', icon:'🔍', color:'#2FB5A0', tasks:[
+    {id:'r8', t:'町や えきで 点字ブロックを 5か所 さがす',
+      done:'5か所 見つけられたら はなまる',
+      memo:'見つけた 数：＿＿か所',
+      hint:'かならず おうちの人と いっしょに 行こう。ホームの はしや、まわりの あんぜんに 気を つけてね'},
+    {id:'r9', t:'見つけた 点字ブロックの ようすを かんさつする',
+      done:'色・かたち・どこに あるかを 見て、気づいた ことを メモできたら はなまる',
+      memo:'気づいた こと（ことばで）',
+      hint:'しゃしんは おうちの人に とって もらおう。この アプリには 入れないよ'},
+    {id:'r10', t:'どこに・どの しゅるいが あったかを「かんさつ表」に 書く',
+      done:'ばしょ（ざっくり）／しゅるい（せん・てん）／QRの あるなし を 書けたら はなまる',
+      memo:'①ばしょ〜・せん or てん・QRあり/なし …（5か所ぶん）',
+      hint:'ばしょは「えきの まえ」など ざっくりで OK。くわしい じゅうしょは 書かないでね'},
+    {id:'r11', t:'QRコード つきと、ついて いないものを くらべる',
+      done:'どこが ちがうかを 書けたら はなまる',
+      memo:'QRあり と QRなし の ちがい'},
+  ]},
+  {stage:'QRコードの ひみつを たしかめよう', icon:'📱', color:'#35A7DE', tasks:[
+    {id:'r12', t:'こうしきページや しょうかい どうがで、shikAI（しかい）の しくみを 知る',
+      done:'QRコードで どんな あんないが できるかを 書けたら はなまる',
+      memo:'shikAI で できる こと',
+      hint:'おうちの人と いっしょに、東京メトロや かいはつ会社の こうしきページ・どうがを 見よう'},
+    {id:'r13', t:'shikAI を じっさいに つかって、どんな あんないが 流れるか たしかめる',
+      done:'スマホを かざすと 何が おきたかを 書けたら はなまる',
+      memo:'かざしたら…（聞こえた あんない）'},
+    {id:'r14', t:'ききたい しつもんを 5つ えらぶ',
+      done:'しつもんを 5つ 書けたら はなまる',
+      memo:'しつもん ① ／ ② ／ ③ ／ ④ ／ ⑤',
+      hint:'東京メトロに 聞ける ことも あるよ（聞けなくても、こうしき しりょうで だいじょうぶ）'},
+    {id:'r15', t:'「よそう」と「本当の 答え」を くらべる',
+      done:'さいしょの よそうと くらべて、びっくりした ことを 書けたら はなまる',
+      memo:'よそう と ちがった ところ'},
+  ]},
+  {stage:'さくひんを つくろう', icon:'🏆', color:'#E85C8A', tasks:[
+    {id:'r16', t:'しゃしんと 文しょうを、しょう（章）ごとに ならべる',
+      done:'「ふしぎ → しらべた → わかった」の じゅんに ならべられたら はなまる',
+      memo:'どんな じゅんばんに する？'},
+    {id:'r17', t:'「よそう」と「本当の 答え」を ならべて くらべる ページを つくる',
+      done:'よそうと 答えを 見くらべできる ページが できたら はなまる',
+      memo:'ならべて 見せたい こと'},
+    {id:'r18', t:'わかった ことと、自分の 考えを 話す',
+      done:'「わたしは こう おもった」を 書けたら はなまる',
+      memo:'わたしの 考え'},
+    {id:'r19', t:'ひょうし・もくじ・「しらべた 本／しりょうの 一らん（出典）」を つくる',
+      done:'つかった 本の名前・かりた 図書館・見た ホームページ・行った えきの名前を 書けたら はなまる',
+      memo:'本の名前 ／ 図書館 ／ ホームページ ／ えきの名前',
+      hint:'コンクールでは 出典（どこで しらべたか）を かならず 書くよ。おうちの人と いっしょに'},
+    {id:'r20', t:'かぞくに はっぴょうして、わかりにくい ところを なおす',
+      done:'はっぴょうして、なおす ところを 1つでも 見つけられたら はなまる',
+      memo:'なおす ところ'},
+    {id:'r21', t:'かんせいした さくひんを ていしゅつする',
+      done:'B4いない・50ページ いないに して、がっこうへ もっていけたら はなまる',
+      memo:'ていしゅつ できた？',
+      hint:'ていしゅつは 9月1日ごろ。B4サイズ・50ページ いないか、おうちの人が かくにんするよ'},
+  ]},
+];
+function rsAllTasks(){
+  const a=[];
+  RESEARCH.forEach((st,si)=>st.tasks.forEach(tk=>a.push(Object.assign({si,stage:st.stage,scolor:st.color,sicon:st.icon},tk))));
+  return a;
+}
+function rsDone(id){return !!state.research.checks[id];}
+function rsProgress(){const a=rsAllTasks();return {done:a.filter(t=>rsDone(t.id)).length,total:a.length};}
+function rsNext(){return rsAllTasks().find(t=>!rsDone(t.id))||null;}
+
+const rsOpen=new Set();
+let researchBuilt=false;
+function buildResearch(){
+  const body=document.getElementById('researchBody');
+  body.innerHTML='';
+  RESEARCH.forEach((st,si)=>{
+    const sec=document.createElement('div');
+    sec.className='rs-stage-sec';
+    sec.id='rs-sec-'+si;
+    sec.style.setProperty('--mcolor',st.color);
+    sec.innerHTML=
+      '<button class="rs-stage-head" aria-expanded="false">'+
+        '<span class="ic">'+st.icon+'</span>'+
+        '<span class="ti">ステージ'+(si+1)+'　'+st.stage+'</span>'+
+        '<span class="ct" id="rs-ct-'+si+'"></span>'+
+        '<span class="arrow">▶</span>'+
+      '</button>'+
+      '<div class="rs-tasks" id="rs-tasks-'+si+'" hidden></div>';
+    const tasksBox=sec.querySelector('.rs-tasks');
+    st.tasks.forEach(tk=>{
+      const card=document.createElement('div');
+      card.className='rs-task';
+      card.id='rs-card-'+tk.id;
+      card.innerHTML=
+        '<div class="rs-task-top">'+
+          '<button class="rs-check" id="rc-'+tk.id+'" aria-label="できたら おす">○</button>'+
+          '<div class="rs-task-body">'+
+            '<div class="rs-task-t">'+tk.t+'</div>'+
+            '<div class="rs-done-mark">'+tk.done+'</div>'+
+            (tk.hint?'<div class="rs-hint">'+tk.hint+'</div>':'')+
+            '<div class="rs-memo"><p class="ph">📝 '+tk.memo+'</p>'+
+              '<textarea id="rm-'+tk.id+'" placeholder="🎤ボタンで はなして メモできるよ（キーボードでも OK）"></textarea>'+
+              '<div class="eq-row">'+
+                '<button class="mic-btn" id="rmic-'+tk.id+'">🎤 はなして メモ</button>'+
+                '<button class="tidy-btn" id="rtidy-'+tk.id+'">✨ ととのえる</button>'+
+                '<span class="eq-status" id="rst-'+tk.id+'"></span>'+
+              '</div>'+
+              '<div class="interim" id="rint-'+tk.id+'" hidden></div>'+
+            '</div>'+
+          '</div>'+
+        '</div>';
+      tasksBox.appendChild(card);
+      // できた！チェック
+      card.querySelector('#rc-'+tk.id).addEventListener('click',()=>{
+        if(rsDone(tk.id))delete state.research.checks[tk.id];
+        else state.research.checks[tk.id]=true;
+        save();renderResearch();
+      });
+      // メモ（音声＋整形）
+      const ta=card.querySelector('#rm-'+tk.id);
+      ta.addEventListener('input',()=>{state.research.memos[tk.id]=ta.value.slice(0,1000);save();autoGrow(ta);});
+      const intEl=card.querySelector('#rint-'+tk.id),stEl=card.querySelector('#rst-'+tk.id),micBtn=card.querySelector('#rmic-'+tk.id);
+      const opts={
+        final:t=>{const cur=ta.value.trim();ta.value=cur?cur+'\n'+t:t;state.research.memos[tk.id]=ta.value.slice(0,1000);save();autoGrow(ta);},
+        interim:t=>{intEl.textContent=t;},
+        status:t=>{stEl.textContent=t;},
+        ui:on=>{micBtn.classList.toggle('rec',on);micBtn.textContent=on?'⏹ おわり':'🎤 はなして メモ';intEl.hidden=!on;if(!on)stEl.textContent='';}
+      };
+      micBtn.addEventListener('click',()=>toggleRec('r_'+tk.id,opts));
+      card.querySelector('#rtidy-'+tk.id).addEventListener('click',async e=>{
+        const b=e.target;
+        if(!ta.value.trim()||b.disabled)return;
+        b.disabled=true;b.textContent='… ととのえ中';
+        const t=await cleanupText(ta.value);
+        ta.value=t;state.research.memos[tk.id]=t.slice(0,1000);save();autoGrow(ta);
+        b.disabled=false;b.textContent='✨ ととのえる';
+      });
+    });
+    sec.querySelector('.rs-stage-head').addEventListener('click',()=>{
+      if(rsOpen.has(si))rsOpen.delete(si);else rsOpen.add(si);
+      applyResearchOpen();
+    });
+    body.appendChild(sec);
+  });
+  const nx=rsNext();if(nx)rsOpen.add(nx.si);   // さいしょは いま やる ステージを ひらく
+}
+function applyResearchOpen(){
+  RESEARCH.forEach((st,si)=>{
+    const sec=document.getElementById('rs-sec-'+si);
+    if(!sec)return;
+    const open=rsOpen.has(si);
+    sec.classList.toggle('open',open);
+    sec.querySelector('.rs-tasks').hidden=!open;
+    sec.querySelector('.rs-stage-head').setAttribute('aria-expanded',open);
+  });
+}
+function renderResearch(){
+  if(!researchBuilt){buildResearch();researchBuilt=true;}
+  document.getElementById('researchNotice').innerHTML=
+    '🔬 しらべる学しゅう「点字ブロックの QRコードは、何のために あるのか」<br>'+
+    '<span style="font-size:13px;font-weight:700">コンクールに チャレンジ！ ステージを 1つずつ すすめよう</span>';
+  const all=rsAllTasks();
+  const {done,total}=rsProgress();
+  const next=rsNext();
+  const gIndex=id=>all.findIndex(t=>t.id===id)+1;
+  const stageChips=RESEARCH.map((st,si)=>{
+    const tot=st.tasks.length,dn=st.tasks.filter(tk=>rsDone(tk.id)).length;
+    return '<span class="rs-stage-chip'+(dn>=tot?' clear':'')+'">'+st.icon+' '+(si+1)+'：'+dn+'/'+tot+'</span>';
+  }).join('');
+  const week=all.filter(t=>!rsDone(t.id)).slice(0,4);
+  let html=
+    '<div class="rs-head">'+
+      '<p class="rs-theme">テーマ：<b>点字ブロックの QRコードは、何のために あるのか</b></p>'+
+      '<div class="rs-prog-label"><span>できた かず</span><span><b>'+done+'</b> / '+total+'</span></div>'+
+      '<div class="rs-bar"><i style="width:'+(total?done/total*100:0)+'%"></i></div>'+
+      '<div class="rs-stages">'+stageChips+'</div>'+
+    '</div>';
+  if(next){
+    html+='<div class="rs-today"><p class="lab">🌱 きょうの いっぽ（つぎに やること）</p>'+
+      '<p class="task">'+gIndex(next.id)+'．'+next.t+'</p>'+
+      '<button class="go" data-go="'+next.id+'" data-si="'+next.si+'">ひらいて やる →</button></div>';
+  }else{
+    html+='<div class="rs-today"><p class="lab">🏆 ぜんぶ できた！</p>'+
+      '<p class="task">21の やること、ぜんぶ かんぺき！ すごい！ さくひんを ていしゅつしよう</p></div>';
+  }
+  if(week.length){
+    html+='<div class="rs-week"><h4>📅 つぎに やる こと</h4><ul>'+
+      week.map(t=>'<li><span class="n">'+gIndex(t.id)+'</span>'+t.t+'</li>').join('')+'</ul></div>';
+  }
+  const top=document.getElementById('researchTop');
+  top.innerHTML=html;
+  const go=top.querySelector('.go[data-go]');
+  if(go)go.addEventListener('click',()=>{
+    const si=Number(go.dataset.si);
+    rsOpen.add(si);applyResearchOpen();
+    const el=document.getElementById('rs-card-'+go.dataset.go);
+    if(el)el.scrollIntoView({behavior:'smooth',block:'center'});
+  });
+  RESEARCH.forEach((st,si)=>{
+    const tot=st.tasks.length,dn=st.tasks.filter(tk=>rsDone(tk.id)).length;
+    const ct=document.getElementById('rs-ct-'+si);if(ct)ct.textContent=dn+' / '+tot;
+    st.tasks.forEach(tk=>{
+      const chk=document.getElementById('rc-'+tk.id),card=document.getElementById('rs-card-'+tk.id),on=rsDone(tk.id);
+      if(chk){chk.classList.toggle('on',on);chk.textContent=on?'✓':'○';}
+      if(card)card.classList.toggle('on',on);
+      const ta=document.getElementById('rm-'+tk.id);
+      if(ta&&document.activeElement!==ta&&!(recActive&&recActive.qid==='r_'+tk.id)){
+        const v=state.research.memos[tk.id]||'';
+        if(ta.value!==v){ta.value=v;autoGrow(ta);}
+      }
+    });
+  });
+  applyResearchOpen();
+}
+
 /* ================= tabs ================= */
 document.querySelectorAll('.tab').forEach(tab=>{
   tab.addEventListener('click',()=>{
     viewDate=null; // タブ切替時は「きょう」に戻す
     document.querySelectorAll('.tab').forEach(x=>x.setAttribute('aria-selected',x===tab));
-    ['today','list','cal','book','essay'].forEach(v=>{
+    ['today','list','cal','book','essay','research'].forEach(v=>{
       document.getElementById('view-'+v).hidden=(tab.dataset.tab!==v);
     });
     if(tab.dataset.tab==='today')renderToday();
     // 非表示中は高さ計算ができないため、表示された時点で回答欄の高さを合わせ直す
     if(tab.dataset.tab==='essay')document.querySelectorAll('.eq-ta').forEach(autoGrow);
+    if(tab.dataset.tab==='research')document.querySelectorAll('.rs-memo textarea').forEach(autoGrow);
   });
 });
 // 日付ナビ（きょう画面）
@@ -2040,7 +2334,7 @@ function stopConfetti(){
 }
 
 /* ================= boot ================= */
-function renderAll(){renderHeader();renderToday();renderList();renderCal();renderBook();renderEssay();}
+function renderAll(){renderHeader();renderToday();renderList();renderCal();renderBook();renderEssay();renderResearch();}
 renderAll();
 setSyncStatus('off');
 if(syncConfigured()){
