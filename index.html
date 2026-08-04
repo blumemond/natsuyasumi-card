@@ -198,6 +198,7 @@ section[hidden]{display:none}
   font-size:11px;background:var(--melon);color:#fff;border-radius:8px;
   padding:1px 8px;font-weight:800;vertical-align:2px;margin-left:6px;
 }
+.badge-opt.home{background:#16A085}
 .arrow{flex:none;font-size:14px;color:var(--ink-soft);transition:transform .2s}
 .hw.open .arrow{transform:rotate(90deg)}
 
@@ -523,7 +524,7 @@ textarea{
     <button class="gear-btn" id="gearBtn">おうちの人<br>せってい</button>
   </div>
   <div class="overall">
-    <div class="overall-label"><span>ぜんぶの すすみぐあい</span><span id="overallPct">0%</span></div>
+    <div class="overall-label"><span>がっこうの しゅくだい</span><span id="overallPct">0%</span></div>
     <div class="bar"><i id="overallBar" style="width:0%"></i></div>
   </div>
 </header>
@@ -841,13 +842,13 @@ function homeworks(){
     {id:'kanpeki_san',name:'かんぺき！なつ休み さんすう',sub:'30こ ○つけ・なおしまで',icon:'📘',unit:'こ',count:30,color:'#4C7DDE'},
     {id:'kanji',name:'かん字ドリル',sub:'50ばんまで',icon:'✏️',unit:'ばん',count:50,color:'#FF6F61'},
     {id:'keisan',name:'けいさんぐんぐん',sub:'29ばんまで',icon:'🔢',unit:'ばん',count:29,color:'#35A7DE'},
-    {id:'mainichi_nikki',name:'まいにち にっき',sub:'1日 1行 かくよ（7/18〜8/31）',icon:'📔',unit:'かい',count:45,color:'#EF8C4B'},
-    {id:'kumon',name:'くもん',sub:'まいにち プリント（7/18〜8/31）',icon:'🖊️',unit:'まい',count:45,color:'#16A085'},
+    {id:'mainichi_nikki',name:'まいにち にっき',sub:'1日 1行 かくよ（7/18〜8/31）',icon:'📔',unit:'かい',count:45,color:'#EF8C4B',extra:true},
+    {id:'kumon',name:'くもん',sub:'まいにち プリント（7/18〜8/31）',icon:'🖊️',unit:'まい',count:45,color:'#16A085',extra:true},
     {id:'dokusho',name:'どくしょカード',sub:'めざせ 20さつ！',icon:'📚',unit:'さつ',count:20,color:'#9C6ADE'},
     {id:'enikki',name:'夏のえにっき',sub:'2日ぶん かくよ',icon:'🖍️',unit:'まい',labels:['1日目','2日目'],color:'#FFB03A'},
     {id:'tanken',name:'町たんけんカード',sub:'お店を 1つ しらべる',icon:'🔍',labels:['お店を きめて カードに かく'],color:'#2FB5A0'},
-    {id:'kansobun',name:'どくしょかんそう文',sub:'げんこうようし 2まいと2行',icon:'📝',labels:['本を よむ','したがきを かく','せいしょを かく'],color:'#E85C8A',optional:true},
-    {id:'shiraberu',name:'しらべる学しゅう',sub:'コンクールに チャレンジ',icon:'🔬',labels:['テーマを きめる','しらべる','まとめる'],color:'#7A8B3A',optional:true},
+    {id:'kansobun',name:'どくしょかんそう文',sub:'げんこうようし 2まいと2行',icon:'📝',labels:['本を よむ','したがきを かく','せいしょを かく'],color:'#E85C8A',optional:true,extra:true},
+    {id:'shiraberu',name:'しらべる学しゅう',sub:'コンクールに チャレンジ',icon:'🔬',labels:['テーマを きめる','しらべる','まとめる'],color:'#7A8B3A',optional:true,extra:true},
   ];
   return H.filter(h=>!h.optional||state.opt[h.id]);
 }
@@ -956,9 +957,11 @@ function outlook(h){ // {remain, perDay, finishISO, status}
   const status=perDay>Math.max(1,Math.ceil(p0*1.5))?'behind':'ontrack';
   return {remain,perDay,finishISO,status};
 }
+// 進捗の割合は「学校の しゅくだい」のみ。家庭の任意課題（extra: くもん・まいにちにっき・かんそう文・しらべる）は含めない
+function schoolHomeworks(){return homeworks().filter(h=>!h.extra);}
 function overall(){
   let t=0,d=0;
-  homeworks().forEach(h=>{t+=units(h);d+=doneCount(h);});
+  schoolHomeworks().forEach(h=>{t+=units(h);d+=doneCount(h);});
   return t?Math.round(d/t*100):0;
 }
 
@@ -1125,7 +1128,7 @@ function paceLine(h){ // 各宿題の「間に合うか」1行
 }
 function renderOutlook(){ // 総合アウトルック帯
   const el=document.getElementById('listOutlook');
-  const os=homeworks().map(h=>({h,o:outlook(h)}));
+  const os=schoolHomeworks().map(h=>({h,o:outlook(h)})); // 「間に合う？」帯も学校の宿題のみ
   const pending=os.filter(x=>x.o.status!=='done');
   if(!pending.length){el.className='outlook ok';el.textContent='🎉 しゅくだいは ぜんぶ おわったよ！';return;}
   const bad=pending.filter(x=>x.o.status==='behind'||x.o.status==='overdue');
@@ -1154,7 +1157,7 @@ function renderList(){
       '<button class="hw-head" aria-expanded="'+openSet.has(h.id)+'">'+
         '<span class="hw-icon">'+h.icon+'</span>'+
         '<span class="hw-tit"><span class="hw-name">'+h.name+
-          (h.optional?'<span class="badge-opt">チャレンジ</span>':'')+
+          (h.optional?'<span class="badge-opt">チャレンジ</span>':(h.extra?'<span class="badge-opt home">おうち</span>':''))+
         '</span><br><span class="hw-sub">'+h.sub+'</span>'+paceLine(h)+'</span>'+
         '<span class="hw-meta"><span class="hw-count">'+done+' / '+total+'</span><br>'+
         '<span class="hw-due">'+((state.plan[h.id]||[]).length
@@ -1256,7 +1259,7 @@ function renderProgChart(){
   const wrap=document.getElementById('progChart');
   const now=document.getElementById('progNow');
   if(!wrap)return;
-  const hw=homeworks();
+  const hw=schoolHomeworks(); // 累積グラフも学校の宿題のみ（上部バーと一致）
   let total=0;const valid=new Set();
   hw.forEach(h=>{const n=units(h);total+=n;for(let i=0;i<n;i++)valid.add(h.id+':'+i);});
   if(!total){wrap.innerHTML='';if(now)now.textContent='';return;}
